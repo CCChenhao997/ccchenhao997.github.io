@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Hexo完善及维护血泪史"><meta name="keywords" content="Hexo"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>Hexo完善及维护血泪史 | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66471139";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主页背景图片不能显示"><span class="toc-number">1.</span> <span class="toc-text"> 主页背景图片不能显示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.1.</span> <span class="toc-text"> 总结：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#博客中插入图片未能显示"><span class="toc-number">2.</span> <span class="toc-text"> 博客中插入图片未能显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件名称改动引发的博客页面404"><span class="toc-number">3.</span> <span class="toc-text"> 文件名称改动引发的博客页面404</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo插入数学公式无法显示问题"><span class="toc-number">4.</span> <span class="toc-text"> Hexo插入数学公式无法显示问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#step-1-use-kramed-instead-of-marked"><span class="toc-number">4.1.</span> <span class="toc-text"> Step 1: Use Kramed instead of Marked</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-2-stop-using-hexo-math"><span class="toc-number">4.2.</span> <span class="toc-text"> Step 2: Stop Using hexo-math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-3-update-mathjax-cdn-url"><span class="toc-number">4.3.</span> <span class="toc-text"> Step 3: Update Mathjax CDN URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#step-4-remember-to-activate-mathjax-for-your-post"><span class="toc-number">4.4.</span> <span class="toc-text"> Step 4: Remember to Activate Mathjax for Your Post</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加了评论插件"><span class="toc-number">5.</span> <span class="toc-text"> 添加了评论插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将hexo博客也挂载到了coding上这样加载速度更快"><span class="toc-number">6.</span> <span class="toc-text"> 将Hexo博客也挂载到了Coding上，这样加载速度更快</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绑定了域名国内访问是访问coding上的国外访问是访问github上的"><span class="toc-number">7.</span> <span class="toc-text"> 绑定了域名，国内访问是访问Coding上的，国外访问是访问Github上的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加了百度谷歌收录谷歌已收录百度还没收录百度贼慢"><span class="toc-number">8.</span> <span class="toc-text"> 添加了百度谷歌收录（谷歌已收录，百度还没收录（百度贼慢））</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试添加网易云音乐模块"><span class="toc-number">9.</span> <span class="toc-text"> 测试添加网易云音乐模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加了文章顶置功能"><span class="toc-number">10.</span> <span class="toc-text"> 添加了文章顶置功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加本站运行时间"><span class="toc-number">11.</span> <span class="toc-text"> 添加本站运行时间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#valine评论邮箱通知失败没弄好"><span class="toc-number">12.</span> <span class="toc-text"> Valine评论邮箱通知失败，没弄好</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原来的archer主题被我玩坏了更换了melody主题"><span class="toc-number">13.</span> <span class="toc-text"> 原来的archer主题被我玩坏了，更换了melody主题</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">47</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">43</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">11</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://zyu963.github.io/index.html">ZY_FZU</a><a class="author-info-links__name text-center" href="https://f0rbeta.github.io/">BJH_NJUPT</a></div><!--乌龟--><object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"><param name="AllowScriptAccess" value="always"><param name="wmode" value="opaque"><param name="scale" value="noscale"><param name="salign" value="tl"></object><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=VVjsa_zTGhAUQ1yB5df-C5TI04O6AmJscZXp_OMAvMQ&cl=ffffff&w=a"></script></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">Hexo完善及维护血泪史</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-08-19</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Tutorials/">Tutorials</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">1.8k</span><span class="post-meta__separator">|</span><span>阅读时长: 6 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>关于hexo搭建后优化完善的一些问题</p>
+<a id="more"></a>
+<h1 id="主页背景图片不能显示"><a class="markdownIt-Anchor" href="#主页背景图片不能显示"></a> 主页背景图片不能显示</h1>
+<p>        2019.8.19日上午，昨天搭建好的博客又意外显示不出主页的图片和站点其他图片。百思不得其所，明明昨天还好好地，今天怎么又出现问题了。</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/%E6%9C%AA%E6%98%BE%E7%A4%BA%E4%B8%BB%E9%A1%B5%E5%9B%BE%E7%89%87.png" width="800" height="450">
+</center>
+<p>        正常显示应该是这样的:</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/%E4%B8%BB%E9%A1%B5%E8%83%8C%E6%99%AF.png" width="800" height="450">
+</center>
+<p>        我在本地localhost打开博客是没有问题的，图片正常显示，说明问题是出在了github上。<br>
+(背景图用的是jon-bg.jpg)</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/intro_%E6%9C%AC%E5%9C%B0.png" width="300" height="450">
+</center>
+<p>        于是我去github上我存放图片的文件夹中看了一下，果然，缺少了主页显示的图片，只剩下一张20多kb的图。</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/intro.jpg" width="800" height="200">
+</center>
+<p>        难道hexo deploy部署的时候比较大的图上传不上去吗？抱着这个疑问我测试了几次，只有一张27kb的图片部署成功了。</p>
+<p>        我又google了一下，github上传文件限制是100M啊，为什么我十几兆的一张图片部署不上去呢？我怀疑问题应该不是出在图片大小的上面。</p>
+<p>        我每次重新部署是用hexo clean &amp;&amp; hexo g -d, 就是 clean genarater deploy 一步到位，我就一顿乱操作（还尝试过用 git add 来把图片上传上去，当然是不可能的😄），把指令拆开，没加hexo clean这一步，只写了 hexo g 生成静态文件, 然后 hexo d 部署到github上去, 就在这时候！！！奇迹发生了。。。</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/%E6%84%8F%E5%A4%96%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F.png" width="800" height="450">
+</center> 
+<p>        本着以“测试工程师”的心态，又试了一遍 hexo clean &amp;&amp; hexo g -d 命令，结果github上的图片又被删了。</p>
+<center>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo/hexo%E5%AE%8C%E5%96%84%E5%8F%8A%E7%BB%B4%E6%8A%A4%E8%A1%80%E6%B3%AA%E5%8F%B2/%E5%8F%88%E8%A2%AB%E5%88%A0%E9%99%A4.png" width="800" height="200">
+</center>
+<p>        <em><strong>以上测试说明 hexo clean 指令可能会删除github上大的图片，或者说运行 hexo clean &amp;&amp; hexo g -d 指令时，不能生成比较大的图片的静态文件，所以在部署的时候未上传到github上，才导致了我上述的问题发生。</strong></em></p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结：</h2>
+<p>        如果需要更新背景图片，我总结了一套指令方案:</p>
+<ol>
+<li>hexo clean 会把原本部署在github上较大的图片给删除掉</li>
+<li>删除掉之后，我想重新上传图片的话，就需要按照以下操作:
+<ul>
+<li>hexo s 先运行本地服务，打开网页之后，再关闭服务</li>
+<li>hexo g 运行该命令生成静态文件，千万不要加上clean</li>
+<li>hexo d 将本地上的文件（github上没有的）部署到github上</li>
+<li>hexo s 再次运行本地服务</li>
+<li>现在可以打开github pages的网址（或者直接查看github博客仓库里面的文件），你会发现ok了</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="博客中插入图片未能显示"><a class="markdownIt-Anchor" href="#博客中插入图片未能显示"></a> 博客中插入图片未能显示</h1>
+<p>        写这篇博客插入图片的时候遇到了这样的问题，所以也顺带记录下来。先是看了一篇插入博客图片的教程:</p>
+<ol>
+<li>
+<p>把主页配置文件_config.yml里的post_asset_folder: 这个选项设置为true;</p>
+</li>
+<li>
+<p>在你hexo目录下执行这样一句话npm install hexo-asset-image --save，这是下载安装一个可以上传本地图片的插件;</p>
+</li>
+<li>
+<p>等待一小段时间后，再运行hexo n &quot;xxxx&quot;来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹;</p>
+</li>
+<li>
+<p>最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br>
+<code>![你想输入的替代文字](xxxx/图片名.jpg)</code></p>
+</li>
+</ol>
+<p>        按照上面的步骤操作到了第四步，使用markdown命令插入图片后，打开博客网页发现图片没有显示出来，就是这样:</p>
+<img src="/post/59292/插入图片未显示.png" title="test"> 
+<p>        然后又是一波 Google and Baidu , 找到了解决方案:</p>
+<ol>
+<li>
+<p>安装插件：<br>
+<code>npm install https://github.com/7ym0n/hexo-asset-image --save</code><br>
+这是个修改过的插件，经测试无问题，使用这个插件来引入图片，而不是网上那些方法里说的用传统md语法相对路径的方法。</p>
+</li>
+<li>
+<p>插入图片时用这种方式：<br>
+<code><img src="/post/59292/插入图片格式.png" title="This is an test image"></code><br>
+其中test.jpg就是你要引用的图片，我这里就是test.jpg，后面的This is an test image是图片描述，可以自己修改。</p>
+</li>
+</ol>
+<p>        最后，博客中的图片就成功显示了。</p>
+<p>        另外，还有一种插入图片的方法，并且能够调整图片的位置，长宽等参数:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">&lt;img src=&quot;test.jpg&quot; width=500 height=300&gt;</span><br><span class="line">&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>center 表示图片居中</li>
+<li>width、height 分别表示图片的宽度和高度</li>
+<li>test.jpg 则是你要插入的图片</li>
+</ul>
+<p>        问题终于解决了，不知道下一个新坑是什么呢😂</p>
+<hr>
+<h1 id="文件名称改动引发的博客页面404"><a class="markdownIt-Anchor" href="#文件名称改动引发的博客页面404"></a> 文件名称改动引发的博客页面404</h1>
+<p>        写完第二部分后，我手贱的将本文档的文件名称和存储图片的同名文件夹名称改了首字母，原本是 <em><strong>hexo完善及维护血泪史</strong></em> ， 由于本人有强迫症，就改成了 <em><strong>Hexo完善及维护血泪史</strong></em>，然后hexo g, hexo d, 打开github pages，发现本博文一点开就是404 not found，在本地的服务打开网页又没有问题。难受呀，我是bug制造机吗？</p>
+<p>        经过 苦思冥想，茶饭不思，昼夜难眠 之后，洗完澡后，打开电脑，打开github，查看那个博客的文件夹，果不其然！</p>
+<img src="/post/59292/hexo血泪.png" title="test"> 
+<p>       github上这个文件及图片文件夹名称没有更新，其原因是：在本地上文件的内容本身是没有改变的，只是改变了名字，所以在部署到github上时，该文件并没有更新，然后本地的文件确改变了名称，这导致了“线上”和“线下”的不匹配，然后打开github pages就是404了。</p>
+<hr>
+<h1 id="hexo插入数学公式无法显示问题"><a class="markdownIt-Anchor" href="#hexo插入数学公式无法显示问题"></a> Hexo插入数学公式无法显示问题</h1>
+<h2 id="step-1-use-kramed-instead-of-marked"><a class="markdownIt-Anchor" href="#step-1-use-kramed-instead-of-marked"></a> Step 1: Use Kramed instead of Marked</h2>
+<p>卸载 Marked and 安装 Kramed, 按照下面的命令操作:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm uninstall hexo-renderer-marked --save</span><br><span class="line">$ npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<p>然后进入<code>&lt;your-project-dir&gt;/node_modules/hexo-renderer-kramed/lib/renderer.js</code>将下面代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) &#123;</span><br><span class="line">    // Fit kramed&apos;s rule: $$ + \1 + $$</span><br><span class="line">    return text.replace(/`\$(.*?)\$`/g, &apos;$$$$$1$$$$&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改成:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) &#123;</span><br><span class="line">    return text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="step-2-stop-using-hexo-math"><a class="markdownIt-Anchor" href="#step-2-stop-using-hexo-math"></a> Step 2: Stop Using hexo-math</h2>
+<p>首先，如果你已经安装过 hexo-math，将它卸载：<br>
+<code>$ npm uninstall hexo-math --save</code><br>
+然后安装 hexo-renderer-mathjax ：<br>
+<code>$ npm install hexo-renderer-mathjax --save</code></p>
+<h2 id="step-3-update-mathjax-cdn-url"><a class="markdownIt-Anchor" href="#step-3-update-mathjax-cdn-url"></a> Step 3: Update Mathjax CDN URL</h2>
+<p>打开文件<code>&lt;path-to-your-project&gt;/node_modules/hexo-renderer-mathjax/mathjax.html</code>.<br>
+然后，将包含CDN URL的 <code>&lt;script&gt;</code> 标记更改为以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>最后，保存文件并关闭。</p>
+<h2 id="step-4-remember-to-activate-mathjax-for-your-post"><a class="markdownIt-Anchor" href="#step-4-remember-to-activate-mathjax-for-your-post"></a> Step 4: Remember to Activate Mathjax for Your Post</h2>
+<p>如果你要使用Mathjax来编辑数学公式，那么在你的post里将mathjax设置为true。如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: Testing Mathjax with Hexo</span><br><span class="line">category: Uncategorized</span><br><span class="line">date: 2019/08/21</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="添加了评论插件"><a class="markdownIt-Anchor" href="#添加了评论插件"></a> 添加了评论插件</h1>
+<hr>
+<h1 id="将hexo博客也挂载到了coding上这样加载速度更快"><a class="markdownIt-Anchor" href="#将hexo博客也挂载到了coding上这样加载速度更快"></a> 将Hexo博客也挂载到了Coding上，这样加载速度更快</h1>
+<hr>
+<h1 id="绑定了域名国内访问是访问coding上的国外访问是访问github上的"><a class="markdownIt-Anchor" href="#绑定了域名国内访问是访问coding上的国外访问是访问github上的"></a> 绑定了域名，国内访问是访问Coding上的，国外访问是访问Github上的</h1>
+<hr>
+<h1 id="添加了百度谷歌收录谷歌已收录百度还没收录百度贼慢"><a class="markdownIt-Anchor" href="#添加了百度谷歌收录谷歌已收录百度还没收录百度贼慢"></a> 添加了百度谷歌收录（谷歌已收录，百度还没收录（百度贼慢））</h1>
+<hr>
+<h1 id="测试添加网易云音乐模块"><a class="markdownIt-Anchor" href="#测试添加网易云音乐模块"></a> 测试添加网易云音乐模块</h1>
+<hr>
+<h1 id="添加了文章顶置功能"><a class="markdownIt-Anchor" href="#添加了文章顶置功能"></a> 添加了文章顶置功能</h1>
+<hr>
+<h1 id="添加本站运行时间"><a class="markdownIt-Anchor" href="#添加本站运行时间"></a> 添加本站运行时间</h1>
+<hr>
+<h1 id="valine评论邮箱通知失败没弄好"><a class="markdownIt-Anchor" href="#valine评论邮箱通知失败没弄好"></a> Valine评论邮箱通知失败，没弄好</h1>
+<hr>
+<h1 id="原来的archer主题被我玩坏了更换了melody主题"><a class="markdownIt-Anchor" href="#原来的archer主题被我玩坏了更换了melody主题"></a> 原来的archer主题被我玩坏了，更换了melody主题</h1>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/59292.html">http://chenhao.space/post/59292.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/post/11633.html"><i class="fa fa-chevron-left">  </i><span>Github上修改邮箱后找回之前的commit</span></a></div><div class="next-post pull-right"><a href="/post/9217.html"><span>Python-sort()与sorted()</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Just go go',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
