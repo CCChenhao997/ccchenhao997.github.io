@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Hexo部署到Github失败问题</title>
+      <link href="/post/72ac9e7e.html"/>
+      <url>/post/72ac9e7e.html</url>
+      
+        <content type="html"><![CDATA[<p>失败提示如下图：</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Git/Hexo%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E5%9B%BE/hexodfailed.png" alt></p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ssh -T git@github.com</span><br><span class="line">ssh: connect to host github.com port 22: Connection refused</span><br></pre></td></tr></table></figure><p>然后发现ping <a href="http://www.github.com" target="_blank" rel="noopener">www.github.com</a> 也ping不通，但是可以ping通 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Git/Hexo%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E5%9B%BE/pinggithubfailed.jpg" alt></p><p>解决办法：</p><p>打开终端输入 sudo vim /etc/hosts</p><p>输入密码（本机密码）</p><p>然后加入（按一下键盘的 i 键，才能输入）</p><p>127.0.0.1 <a href="http://github.com" target="_blank" rel="noopener">github.com</a><br>151.101.185.194 <a href="http://github.global.ssl.fastly.net" target="_blank" rel="noopener">github.global.ssl.fastly.net</a></p><p>保存退出:wq</p><p>然后再ping <a href="http://www.github.com" target="_blank" rel="noopener">www.github.com</a> 就能成功了。</p><p>但是 hexo d 部署还是出现上面的问题。</p><p>解决办法：</p><p>打开<code>.ssh</code>文件夹下的<code>config</code>文件，添加以下内容：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">  HostName ssh.github.com</span><br><span class="line">  Port 443</span><br><span class="line">  PreferredAuthentications publickey</span><br><span class="line">  IdentityFile ~/.ssh/iwwenbo_rsa</span><br></pre></td></tr></table></figure><p>然后再 hexo d 部署一下就成功了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 部署失败 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Pytorch-Linear_Regression</title>
       <link href="/post/7f30013.html"/>
       <url>/post/7f30013.html</url>
