@@ -514,11 +514,11 @@
       
         <tags>
             
-            <tag> TF-IDF </tag>
-            
             <tag> NLTK </tag>
             
             <tag> BOW </tag>
+            
+            <tag> TF-IDF </tag>
             
         </tags>
       
@@ -943,9 +943,9 @@
       
         <tags>
             
-            <tag> One-hot </tag>
-            
             <tag> TF-IDF </tag>
+            
+            <tag> One-hot </tag>
             
             <tag> 词向量 </tag>
             
@@ -1402,7 +1402,7 @@
       
       <categories>
           
-          <category> Tutorials </category>
+          <category> Hexo </category>
           
       </categories>
       
