@@ -189,7 +189,7 @@
       <link href="/post/b9e096e0.html"/>
       <url>/post/b9e096e0.html</url>
       
-        <content type="html"><![CDATA[<p>我的情况是刚装完搜狗输入法，然后打字发现候选词栏全都是乱码。</p><p>解决办法：</p><p>输入命令 <code>sudo apt-get install -f</code> 进行依赖性检查。然后就解决了。</p><p>参考资料:</p><ol><li>[<a href="https://blog.csdn.net/qq_36556893/article/details/92607479" target="_blank" rel="noopener">https://blog.csdn.net/qq_36556893/article/details/92607479</a>](</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>我的情况是刚装完搜狗输入法，然后打字发现候选词栏全都是乱码。</p><p>解决办法：</p><p>输入命令 <code>sudo apt-get install -f</code> 进行依赖性检查。然后就解决了。</p><p>上面的方法好像是短暂的，过一会又不行了。</p><p>终端输入</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd ~/.config</span><br><span class="line">rm -rf SogouPY* sogou*</span><br></pre></td></tr></table></figure><p>然后杀掉输入法进程</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">killall fcitx</span><br></pre></td></tr></table></figure><p>参考资料:</p><ol><li><a href="https://blog.csdn.net/qq_36556893/article/details/92607479" target="_blank" rel="noopener">https://blog.csdn.net/qq_36556893/article/details/92607479</a></li><li><a href="https://blog.csdn.net/a6333230/article/details/95305918" target="_blank" rel="noopener">https://blog.csdn.net/a6333230/article/details/95305918</a></li></ol>]]></content>
       
       
       <categories>
