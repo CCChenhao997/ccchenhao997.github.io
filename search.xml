@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Python-csv格式转tsv格式</title>
+      <link href="/post/b7b37f12.html"/>
+      <url>/post/b7b37f12.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="csv-to-tsv"><a class="markdownIt-Anchor" href="#csv-to-tsv"></a> .csv to .tsv</h1><h1 id="csv-to-tsv-2"><a class="markdownIt-Anchor" href="#csv-to-tsv-2"></a> .csv to .tsv</h1><p>这是一个CSV格式的文件：</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Python/CSV%E6%A0%BC%E5%BC%8F%E8%BD%ACTSV%E6%A0%BC%E5%BC%8F/image-01.png" alt></p><p>我想要提取出表头为rating和comment的数据，并且转为tsv格式。</p><p>首先，提取rating和comment数据：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas</span><br><span class="line"></span><br><span class="line">path = <span class="string">'./MovieRatings.csv'</span></span><br><span class="line">pd_all = pd.read_csv(path)</span><br><span class="line">pd_all.to_csv(<span class="string">'./MOVIE.csv'</span>, header=<span class="literal">None</span>, index=<span class="literal">False</span>, columns=[<span class="string">"rating"</span>, <span class="string">"comment"</span>], mode=<span class="string">"w"</span>)</span><br></pre></td></tr></table></figure><p>现在我们就得到了MOVIE.csv文件了，并且去掉了表头(header=None)：</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Python/CSV%E6%A0%BC%E5%BC%8F%E8%BD%ACTSV%E6%A0%BC%E5%BC%8F/image-02.png" alt></p><p>接下来将它转成tsv格式文件：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">csv.writer(open(<span class="string">'/Users/chenhao/项目/数据整理/Movie/MOVIE.tsv'</span>, <span class="string">'w+'</span>), delimiter=<span class="string">'\t'</span>).writerows(csv.reader(open(<span class="string">"/Users/chenhao/项目/数据整理/Movie/MOVIE.csv"</span>)))</span><br></pre></td></tr></table></figure><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Python/CSV%E6%A0%BC%E5%BC%8F%E8%BD%ACTSV%E6%A0%BC%E5%BC%8F/image-03.png" alt></p><p>但是数据的分隔好像是\t还多了个空格符，不太清楚怎么回事。</p><p>还有一种办法转换csv to tsv，而且更简单：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MOVIE_train.to_csv(<span class="string">"MOVIE_5_train_seg.tsv"</span>, sep=<span class="string">"\t"</span>, header=<span class="literal">None</span>, index=<span class="literal">False</span>, mode=<span class="string">"w+"</span>)</span><br></pre></td></tr></table></figure><p>MOVIE_train是我已经读取的csv文件，这样生成的tsv好像也还是\t后面多了一个空格符。</p><hr><h1 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h1><p>读取csv文件不想读取表头，可以设置header=-1。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> csv </tag>
+            
+            <tag> tsv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Pytorch-DataLoader的使用</title>
       <link href="/post/d313d236.html"/>
       <url>/post/d313d236.html</url>
