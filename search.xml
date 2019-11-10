@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Git分支命令</title>
+      <link href="/post/4673535a.html"/>
+      <url>/post/4673535a.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="流程"><a class="markdownIt-Anchor" href="#流程"></a> 流程</h2><p>每次第一件事一定要记得<code>git pull</code> !!!</p><p><code>git branch</code> 查看分支情况</p><p><code>git branch dev</code> 创建一个分支，名字叫dev</p><p><code>git checkout dev</code> switch到dev分支下</p><p><code>git add xxx</code></p><p><code>git commit -m &quot;xxxxx&quot;</code></p><p><code>git status</code></p><p><code>git checkout master</code> 切换到主分支</p><p><code>git merge dev</code> 合并dev分支的操作</p><p><code>git pull</code></p><h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2><p><code>git checkout -b dev</code> 创建并切换到dev分支</p><p><code>git branch -d dev</code> 删除dev分支</p><p><code>git log</code> 查看提交历史</p><p><code>git reset</code> <a href="https://www.cnblogs.com/quan-coder/p/8459490.html" target="_blank" rel="noopener">https://www.cnblogs.com/quan-coder/p/8459490.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> branch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>mac安装libsvm库</title>
       <link href="/post/af61a7f7.html"/>
       <url>/post/af61a7f7.html</url>
