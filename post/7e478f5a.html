@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Jinja2模版和过滤器"><meta name="keywords" content="Jinja2,过滤器"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>Jinja2模版和过滤器 | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66471139";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模版"><span class="toc-number">1.</span> <span class="toc-text"> 模版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jinja2模版"><span class="toc-number">2.</span> <span class="toc-text"> Jinja2模版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两个概念"><span class="toc-number">2.1.</span> <span class="toc-text"> 两个概念：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#渲染模版函数"><span class="toc-number">2.2.</span> <span class="toc-text"> 渲染模版函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#演示"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 演示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量代码块的使用"><span class="toc-number">2.3.</span> <span class="toc-text"> 变量代码块的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注释"><span class="toc-number">2.3.1.</span> <span class="toc-text"> 注释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量代码块"><span class="toc-number">2.3.2.</span> <span class="toc-text"> 变量代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#演示-2"><span class="toc-number">2.3.3.</span> <span class="toc-text"> 演示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制代码块"><span class="toc-number">2.4.</span> <span class="toc-text"> 控制代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#演示-3"><span class="toc-number">2.4.1.</span> <span class="toc-text"> 演示</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过滤器"><span class="toc-number">3.</span> <span class="toc-text"> 过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见内建过滤器"><span class="toc-number">3.1.</span> <span class="toc-text"> 常见内建过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串操作"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 字符串操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列表操作"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 列表操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#语句块过滤"><span class="toc-number">3.1.3.</span> <span class="toc-text"> 语句块过滤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链式调用"><span class="toc-number">3.2.</span> <span class="toc-text"> 链式调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演示-4"><span class="toc-number">3.3.</span> <span class="toc-text"> 演示</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">77</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">73</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">14</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" href="https://zyu963.github.io/index.html">ZY_FZU</a><a class="author-info-links__name text-center" href="https://f0rbeta.github.io/">BJH_NJUPT</a></div><!--乌龟--><object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"><param name="AllowScriptAccess" value="always"><param name="wmode" value="opaque"><param name="scale" value="noscale"><param name="salign" value="tl"></object><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=VVjsa_zTGhAUQ1yB5df-C5TI04O6AmJscZXp_OMAvMQ&cl=ffffff&w=a"></script></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">Jinja2模版和过滤器</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-11-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Flask/">Flask</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><span>阅读时长: 7 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="模版"><a class="markdownIt-Anchor" href="#模版"></a> 模版</h2>
+<p>视图函数的主要作用是生成请求的响应，这是最简单的请求。实际上，视图函数有两个作用：处理业务逻辑和返回响应内容。在大型应用中，把业务逻辑和表现内容放在一起，会增加代码的复杂度和维护成本。模板的作用即是承担视图函数的另一个作用，即返回响应内容。</p>
+<ul>
+<li>模板其实是一个包含响应文本的文件，其中用占位符(变量)表示动态部分，告诉模板引擎其具体的值需要从使用的数据中获取</li>
+<li>使用真实值替换变量，再返回最终得到的字符串，这个过程称为“渲染”</li>
+<li>Flask是使用 <strong>Jinja2</strong> 这个模板引擎来渲染模板</li>
+</ul>
+<p>使用模板的好处：</p>
+<ul>
+<li>视图函数只负责业务逻辑和数据处理(业务逻辑方面)</li>
+<li>而模板则取到视图函数的数据结果进行展示(视图展示方面)</li>
+<li>代码结构清晰，耦合度低</li>
+</ul>
+<hr>
+<h2 id="jinja2模版"><a class="markdownIt-Anchor" href="#jinja2模版"></a> Jinja2模版</h2>
+<h3 id="两个概念"><a class="markdownIt-Anchor" href="#两个概念"></a> 两个概念：</h3>
+<ul>
+<li>Jinja2：是 Python 下一个被广泛应用的模板引擎，是由Python实现的模板语言，他的设计思想来源于 Django 的模板引擎，并扩展了其语法和一系列强大的功能，其是Flask内置的模板语言。</li>
+<li>模板语言：是一种被设计来自动生成文档的简单文本格式，在模板语言中，一般都会把一些变量传给模板，替换模板的特定位置上预先定义好的占位变量名。</li>
+</ul>
+<h3 id="渲染模版函数"><a class="markdownIt-Anchor" href="#渲染模版函数"></a> 渲染模版函数</h3>
+<ul>
+<li>Flask提供的 <strong>render_template</strong> 函数封装了该模板引擎。</li>
+<li><strong>render_template</strong> 函数的第一个参数是模板的文件名，后面的参数都是键值对，表示模板中变量对应的真实值。</li>
+</ul>
+<h4 id="演示"><a class="markdownIt-Anchor" href="#演示"></a> 演示</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.如何返回一个网页(模板)</span></span><br><span class="line"><span class="comment"># 2.如何给模版填充一个数据</span></span><br><span class="line"><span class="meta">@app.route("/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">"index.html"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><code>index.html</code>中的内容：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    这是模板 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    这是首页 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>返回结果：</p>
+<p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Flask/Jinja2%E6%A8%A1%E7%89%88%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8/image-01.png" alt></p>
+<p><strong>传入变量</strong>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 比如需要传入网址</span></span><br><span class="line">    url_str = <span class="string">"www.baidu.com"</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">"index.html"</span>, url_str=url_str)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    这是模板 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    这是首页 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;&#123; url_str &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Flask/Jinja2%E6%A8%A1%E7%89%88%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8/image-02.png" alt></p>
+<h3 id="变量代码块的使用"><a class="markdownIt-Anchor" href="#变量代码块的使用"></a> 变量代码块的使用</h3>
+<h4 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h4>
+<ul>
+<li>使用  进行注释</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;# 这是注释 #&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="变量代码块"><a class="markdownIt-Anchor" href="#变量代码块"></a> 变量代码块</h4>
+<ul>
+<li>{ {  } } 来表示变量名，这种 { {  } } 语法叫做<strong>变量代码块</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;&#123; post.title &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>Jinja2 模版中的变量代码块可以是任意Python类型或者对象，只要它能够被Python的str()方法转换为一个字符串就可以,比如,可以通过下面的方式显示一个字典或者列表中的某个元素:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;&#123;your_dict[<span class="string">'key'</span>]&#125;&#125;</span><br><span class="line">&#123;&#123;your_list[<span class="number">0</span>]&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="演示-2"><a class="markdownIt-Anchor" href="#演示-2"></a> 演示</h4>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.如何返回一个网页(模板)</span></span><br><span class="line"><span class="comment"># 2.如何给模版填充一个数据</span></span><br><span class="line"><span class="meta">@app.route("/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 比如需要传入网址</span></span><br><span class="line">    url_str = <span class="string">"www.baidu.com"</span></span><br><span class="line">    my_list = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>]</span><br><span class="line">    my_dict = &#123;<span class="string">"name"</span>: <span class="string">"Chenhao's Studio"</span>, <span class="string">"url"</span>: <span class="string">"www.chenhao.space"</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 通常，模板中使用的变量名和要传递的数据的变量名保持一致</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">"index.html"</span>, url_str=url_str, my_list=my_list, my_dict=my_dict)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    这是模板 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    这是首页 <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &#123;#下面是一个变量代码块的使用#&#125;</span><br><span class="line">    &#123;&#123; url_str &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &#123;#列表的使用#&#125;</span><br><span class="line">    &#123;&#123; my_list &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;&#123; my_list.2 &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;&#123; my_list[2] &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    &#123;#字典的使用#&#125;</span><br><span class="line">    &#123;&#123; my_dict &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;&#123; my_dict.url &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;&#123; my_dict['url'] &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Flask/Jinja2%E6%A8%A1%E7%89%88%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8/image-03.png" alt></p>
+<h3 id="控制代码块"><a class="markdownIt-Anchor" href="#控制代码块"></a> 控制代码块</h3>
+<ul>
+<li>用 {<strong>%%</strong>} 定义的<strong>控制代码块</strong>，可以实现一些语言层次的功能，比如循环或者if语句</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;% if user %&#125;</span><br><span class="line">    &#123;&#123; user &#125;&#125;</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">    hello!</span><br><span class="line"></span><br><span class="line">&#123;% for index in indexs %&#125;</span><br><span class="line">    &#123;&#123; index &#125;&#125; </span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="演示-3"><a class="markdownIt-Anchor" href="#演示-3"></a> 演示</h4>
+<p>只需在<code>index.html</code> 的body中添加以下代码:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">  &#123;#for循环的使用#&#125;</span><br><span class="line">  &#123;% for num in my_list %&#125;</span><br><span class="line">      &#123;#数据大于3，才能显示#&#125;</span><br><span class="line">      &#123;% if num &gt; 3 %&#125;</span><br><span class="line">          &#123;&#123; num &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>返回结果:</p>
+<p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Flask/Jinja2%E6%A8%A1%E7%89%88%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8/image-04.png" alt></p>
+<hr>
+<h2 id="过滤器"><a class="markdownIt-Anchor" href="#过滤器"></a> 过滤器</h2>
+<p>过滤器的本质就是函数。有时候我们不仅仅只是需要输出变量的值，我们还需要修改变量的显示，甚至格式化、运算等等，而在模板中是不能直接调用 Python 中的某些方法，那么这就用到了过滤器。</p>
+<p>使用方式：</p>
+<ul>
+<li>过滤器的使用方式为：变量名 | 过滤器。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;&#123;variable | filter_name(*args)&#125;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果没有任何参数传给过滤器,则可以把括号省略掉</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;&#123;variable | filter_name&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常见内建过滤器"><a class="markdownIt-Anchor" href="#常见内建过滤器"></a> 常见内建过滤器</h3>
+<h4 id="字符串操作"><a class="markdownIt-Anchor" href="#字符串操作"></a> 字符串操作</h4>
+<ul>
+<li>safe：禁用转义</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; '&lt;em&gt;hello&lt;/em&gt;' | safe &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>capitalize：把变量值的首字母转成大写，其余字母转小写</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'hello' | capitalize &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>lower：把值转成小写</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'HELLO' | lower &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>upper：把值转成大写</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'hello' | upper &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>title：把值中的每个单词的首字母都转成大写</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'hello' | title &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>reverse：字符串反转</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'olleh' | reverse &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>format：格式化输出</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; '%s is %d' | format('name',17) &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>striptags：渲染之前把值中所有的HTML标签都删掉</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; '&lt;em&gt;hello&lt;/em&gt;' | striptags &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>truncate: 字符串截断</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; 'hello every one' | truncate(9)&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="列表操作"><a class="markdownIt-Anchor" href="#列表操作"></a> 列表操作</h4>
+<ul>
+<li>first：取第一个元素</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; [1,2,3,4,5,6] | first &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>last：取最后一个元素</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; [1,2,3,4,5,6] | last &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>length：获取列表长度</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; [1,2,3,4,5,6] | length &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sum：列表求和</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; [1,2,3,4,5,6] | sum &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sort：列表排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;&#123;&#123; [6,2,3,1,5,4] | sort &#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="语句块过滤"><a class="markdownIt-Anchor" href="#语句块过滤"></a> 语句块过滤</h4>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% filter upper %&#125;</span><br><span class="line">    一大堆文字</span><br><span class="line">&#123;% endfilter %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="链式调用"><a class="markdownIt-Anchor" href="#链式调用"></a> 链式调用</h3>
+<p>在 jinja2 中，过滤器是可以支持链式调用的，示例如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;&#123; <span class="string">"hello world"</span> | reverse | upper &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="演示-4"><a class="markdownIt-Anchor" href="#演示-4"></a> 演示</h3>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&#123;#过滤器#&#125;</span><br><span class="line"></span><br><span class="line">  &#123;#字符串变大写#&#125;</span><br><span class="line">  &#123;&#123; url_str | upper &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  &#123;#字符串反转#&#125;</span><br><span class="line">  &#123;&#123; url_str | reverse &#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  &#123;#过滤器链式调用#&#125;</span><br><span class="line">  &#123;&#123; url_str | upper | reverse &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>返回结果:</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Flask/Jinja2%E6%A8%A1%E7%89%88%E5%92%8C%E8%BF%87%E6%BB%A4%E5%99%A8/image-05.png" style="zoom:50%;">
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/7e478f5a.html">http://chenhao.space/post/7e478f5a.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Jinja2/">Jinja2</a><a class="post-meta__tags" href="/tags/过滤器/">过滤器</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/post/efcec196.html"><span>Flask基础</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Just go go',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
