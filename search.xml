@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>slides_test</title>
+      <link href="/post/undefined.html"/>
+      <url>/post/undefined.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="hexo-theme-melody-smallv15small"><a class="markdownIt-Anchor" href="#hexo-theme-melody-smallv15small"></a> hexo-theme-melody <small>v1.5</small></h3><!-- .slide: data-background="#49B1F5" --><p>Supports iframe &amp; slides. You can use a layout called <code>slides</code> to enabled the slides layout.</p><p>Also you can add a <code>iframe</code> front-matter with the <code>slides</code> layout in your <code>md</code> file to enable the iframe page.</p><h3 id="steps"><a class="markdownIt-Anchor" href="#steps"></a> Steps</h3><!-- .slide: data-transition="concave" data-background="#C7916B" --><h4 id="1-add-a-slides-page"><a class="markdownIt-Anchor" href="#1-add-a-slides-page"></a> 1. Add a slides page</h4><p>// …</p><p>==</p><p>// …</p><p>===</p><h4 id="2-add-the-layout-type"><a class="markdownIt-Anchor" href="#2-add-the-layout-type"></a> 2. Add the layout type</h4><!-- .slide: data-transition="fade" data-background="#00C4B6" --><p>// …</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Slides </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SentiLR:Linguistic Knowledge Enhanced Language Representation for Sentiment Analysis 论文阅读笔记</title>
       <link href="/post/8b988c24.html"/>
       <url>/post/8b988c24.html</url>
