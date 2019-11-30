@@ -4,9 +4,34 @@
   
     
     <entry>
+      <title>MacOS-homebrew卸载重装并更换国内源</title>
+      <link href="/post/90d57007.html"/>
+      <url>/post/90d57007.html</url>
+      
+        <content type="html"><![CDATA[<ol><li><p>卸载：<code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)&quot;</code></p></li><li><p>重装：<code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p></li><li><p>更新：<code>brew update</code></p></li><li><p>更换科大镜像源：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 第一步：替换brew.git</span><br><span class="line">cd &quot;$(brew --repo)&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line"># 第二步：替换homebrew-core.git</span><br><span class="line">cd &quot;$(brew --repo)/Library/Taps/homebrew/homebrew-core&quot;</span><br><span class="line">git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line"># 更新</span><br><span class="line">brew update</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> MacOS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> homebrew </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>slides_test</title>
-      <link href="/post/undefined.html"/>
-      <url>/post/undefined.html</url>
+      <link href="/post/20191123.html"/>
+      <url>/post/20191123.html</url>
       
         <content type="html"><![CDATA[<h3 id="hexo-theme-melody-smallv15small"><a class="markdownIt-Anchor" href="#hexo-theme-melody-smallv15small"></a> hexo-theme-melody <small>v1.5</small></h3><!-- .slide: data-background="#49B1F5" --><p>Supports iframe &amp; slides. You can use a layout called <code>slides</code> to enabled the slides layout.</p><p>Also you can add a <code>iframe</code> front-matter with the <code>slides</code> layout in your <code>md</code> file to enable the iframe page.</p><h3 id="steps"><a class="markdownIt-Anchor" href="#steps"></a> Steps</h3><!-- .slide: data-transition="concave" data-background="#C7916B" --><h4 id="1-add-a-slides-page"><a class="markdownIt-Anchor" href="#1-add-a-slides-page"></a> 1. Add a slides page</h4><p>// …</p><p>==</p><p>// …</p><p>===</p><h4 id="2-add-the-layout-type"><a class="markdownIt-Anchor" href="#2-add-the-layout-type"></a> 2. Add the layout type</h4><!-- .slide: data-transition="fade" data-background="#00C4B6" --><p>// …</p>]]></content>
       
