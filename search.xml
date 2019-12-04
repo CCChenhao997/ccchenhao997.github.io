@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>训练集/验证集/测试集的区别</title>
+      <link href="/post/ef3b1e7d.html"/>
+      <url>/post/ef3b1e7d.html</url>
+      
+        <content type="html"><![CDATA[<p>深度学习模型的参数分为普通参数和超参数：</p><p>普通参数：在模型训练的过程中可以被梯度下降所更新的，也就是训练集所更新的参数。</p><p>超参数：比如网络层数、网络节点数、迭代次数、学习率等等，这些参数不在梯度下降的更新范围内。超参数的设置一般是人工根据验证集来调。</p><p><strong>训练集</strong>的作用就是通过梯度下降来调整模型的内部普通参数。</p><p><strong>验证集</strong>的作用是在每个epoch完成后，用来测试一下当前模型的准确率，并根据验证集的准确率调整模型的超参数，如迭代次数、学习率等；在每一步训练之后，计算验证集的分类精度。一旦验证集的分类精度达到饱和，就停止训练。这种策略叫做<em>提前终止（early stopping）</em>。</p><p><strong>测试集</strong>是用来评估模最终模型的泛化能力。但不能作为调参、选择特征等算法相关的选择的依据。</p><p>参考资料：</p><ol><li><a href="http://www.manongjc.com/article/37736.html" target="_blank" rel="noopener">http://www.manongjc.com/article/37736.html</a></li><li><a href="https://blog.csdn.net/ytusdc/article/details/86488537" target="_blank" rel="noopener">https://blog.csdn.net/ytusdc/article/details/86488537</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dataset </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Multi-grained Attention Network for Aspect-LevelSentiment Classification 阅读笔记</title>
       <link href="/post/eccc920c.html"/>
       <url>/post/eccc920c.html</url>
