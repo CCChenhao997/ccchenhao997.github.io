@@ -33,7 +33,7 @@
       <link href="/post/4e5b9b4c.html"/>
       <url>/post/4e5b9b4c.html</url>
       
-        <content type="html"><![CDATA[<p>切换参数：fede，slide，convex，concave，zoom，或者停用动画：none（在你没有设置时，Reveal.js 默认采用 slide 动画）。特别注意的是，参数一定要小写，否则不生效。</p><p>背景十六进制颜色：<a href="https://www.sioe.cn/yingyong/yanse-rgb-16/" target="_blank" rel="noopener">在线工具</a></p><p>翻页：—默认是左右，–默认是上下</p><p>相关链接：</p><ol><li><a href="https://github.com/hakimel/reveal.js#markdown" target="_blank" rel="noopener">https://github.com/hakimel/reveal.js#markdown</a></li><li><a href="https://www.slideas.app/" target="_blank" rel="noopener">https://www.slideas.app/</a></li><li>[<a href="https://sspai.com/post/40657" target="_blank" rel="noopener">https://sspai.com/post/40657</a>](</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>切换参数：fede，slide，convex，concave，zoom，或者停用动画：none（在你没有设置时，Reveal.js 默认采用 slide 动画）。特别注意的是，参数一定要小写，否则不生效。</p><p>背景十六进制颜色：<a href="https://www.sioe.cn/yingyong/yanse-rgb-16/" target="_blank" rel="noopener">在线工具</a></p><p>翻页：<code>---</code>默认是左右，<code>--</code>默认是上下</p><p>相关链接：</p><ol><li><a href="https://github.com/hakimel/reveal.js#markdown" target="_blank" rel="noopener">https://github.com/hakimel/reveal.js#markdown</a></li><li><a href="https://www.slideas.app/" target="_blank" rel="noopener">https://www.slideas.app/</a></li><li>[<a href="https://sspai.com/post/40657" target="_blank" rel="noopener">https://sspai.com/post/40657</a>](</li></ol>]]></content>
       
       
       <categories>
