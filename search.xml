@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Markdown-Reveal.js-Slides</title>
+      <link href="/post/4e5b9b4c.html"/>
+      <url>/post/4e5b9b4c.html</url>
+      
+        <content type="html"><![CDATA[<p>切换参数：fede，slide，convex，concave，zoom，或者停用动画：none（在你没有设置时，Reveal.js 默认采用 slide 动画）。特别注意的是，参数一定要小写，否则不生效。</p><p>背景十六进制颜色：<a href="https://www.sioe.cn/yingyong/yanse-rgb-16/" target="_blank" rel="noopener">在线工具</a></p><p>翻页：—默认是左右，–默认是上下</p><p>相关链接：</p><ol><li><a href="https://github.com/hakimel/reveal.js#markdown" target="_blank" rel="noopener">https://github.com/hakimel/reveal.js#markdown</a></li><li><a href="https://www.slideas.app/" target="_blank" rel="noopener">https://www.slideas.app/</a></li><li>[<a href="https://sspai.com/post/40657" target="_blank" rel="noopener">https://sspai.com/post/40657</a>](</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> slides </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>训练集/验证集/测试集的区别</title>
       <link href="/post/ef3b1e7d.html"/>
       <url>/post/ef3b1e7d.html</url>
@@ -108,7 +133,7 @@
       <link href="/post/20191123.html"/>
       <url>/post/20191123.html</url>
       
-        <content type="html"><![CDATA[<h3 id="hexo-theme-melody-smallv15small"><a class="markdownIt-Anchor" href="#hexo-theme-melody-smallv15small"></a> hexo-theme-melody <small>v1.5</small></h3><!-- .slide: data-background="#49B1F5" --><p>Supports iframe &amp; slides. You can use a layout called <code>slides</code> to enabled the slides layout.</p><p>Also you can add a <code>iframe</code> front-matter with the <code>slides</code> layout in your <code>md</code> file to enable the iframe page.</p><h3 id="steps"><a class="markdownIt-Anchor" href="#steps"></a> Steps</h3><!-- .slide: data-transition="concave" data-background="#C7916B" --><h4 id="1-add-a-slides-page"><a class="markdownIt-Anchor" href="#1-add-a-slides-page"></a> 1. Add a slides page</h4><p>// …</p><p>==</p><p>// …</p><p>===</p><h4 id="2-add-the-layout-type"><a class="markdownIt-Anchor" href="#2-add-the-layout-type"></a> 2. Add the layout type</h4><!-- .slide: data-transition="fade" data-background="#00C4B6" --><p>// …</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="hexo-theme-melody-smallv15small"><a class="markdownIt-Anchor" href="#hexo-theme-melody-smallv15small"></a> hexo-theme-melody <small>v1.5</small></h3><!-- .slide: data-background="#49B1F5" --><p>Supports iframe &amp; slides. You can use a layout called <code>slides</code> to enabled the slides layout.</p><p>Also you can add a <code>iframe</code> front-matter with the <code>slides</code> layout in your <code>md</code> file to enable the iframe page.</p><p>===</p><h3 id="steps"><a class="markdownIt-Anchor" href="#steps"></a> Steps</h3><!-- .slide: data-transition="concave" data-background="#C7916B" --><p>==</p><h4 id="1-add-a-slides-page"><a class="markdownIt-Anchor" href="#1-add-a-slides-page"></a> 1. Add a slides page</h4><!-- .slide: data-transition="concave" data-background="#C7916B" --><p>内容</p><p>==</p><h4 id="2-add-the-layout-type"><a class="markdownIt-Anchor" href="#2-add-the-layout-type"></a> 2. Add the layout type</h4><!-- .slide: data-transition="concave" data-background="#C7916B" --><p>// …</p><p>===</p><h3 id="latex"><a class="markdownIt-Anchor" href="#latex"></a> latex</h3><!-- .slide: data-transition="fade" data-background="#00C4B6" --><p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mi>x</mi><mi>y</mi></mfrac><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">\frac{x}{y} = 8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.9880000000000002em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span></span></p><p>==</p><h4 id="shuxue"><a class="markdownIt-Anchor" href="#shuxue"></a> shuxue</h4><!-- .slide: data-transition="fade" data-background="#00C4B6" --><p>$ {n_1, n_2, n_3} $</p><p>===</p><h3 id="haha"><a class="markdownIt-Anchor" href="#haha"></a> haha</h3><p>震惊！国内某数字消费资讯网站竟提供这种服务</p><ul><li><p>🔧 效率工具推荐 &amp; 生产力技巧</p></li><li><p>💰 这些产品值得买</p></li><li><p>🔭 这个技术你会懂</p></li><li><p>👍 什么是最好的？</p></li></ul>]]></content>
       
       
       <categories>
@@ -120,7 +145,7 @@
       
         <tags>
             
-            <tag> hexo </tag>
+            <tag> slides </tag>
             
         </tags>
       
