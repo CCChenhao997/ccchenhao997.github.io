@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chenhao.space/about/index.html</loc>
+    
+    <lastmod>2019-12-31T11:52:59.309Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chenhao.space/post/f80c7d8e.html</loc>
     
     <lastmod>2019-12-07T00:55:45.536Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://chenhao.space/post/ef3b1e7d.html</loc>
     
     <lastmod>2019-12-04T12:39:15.697Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chenhao.space/about/index.html</loc>
-    
-    <lastmod>2019-12-01T12:26:16.630Z</lastmod>
     
   </url>
   
