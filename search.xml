@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>模型训练或加载过程中出现CUDA out of memory</title>
+      <link href="/post/2603335a.html"/>
+      <url>/post/2603335a.html</url>
+      
+        <content type="html"><![CDATA[<p>报错：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RuntimeError: CUDA out of memory. Tried to allocate 62.00 MiB (GPU 0; 10.76 GiB total capacity; 0 bytes already allocated; 40.12 MiB free; 0 bytes cached)</span><br></pre></td></tr></table></figure><p>可能的两种原因：</p><ol><li><p>比如训练bert这种参数很多的模型的时候，可能是batch_size或者padding_size设置的过大，导致显存不够。这种情况下，把batch_size或者padding_size改小一点试试。</p></li><li><p>cuda默认的是使用0号，可能这张卡正有人在跑模型。<code>nvidia-smi</code>查看GPU使用情况。如果有其他的显卡空闲，就换空闲的卡。</p><p><code>device = torch.device(&quot;cuda:3&quot; if torch.cuda.is_available() else &quot;cpu&quot;)</code></p><p>注意，加载模型的时候也是默认使用的是cuda:0。</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model.load_state_dict(torch.load(config.save_path, map_location=device))</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Pytorch </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cuda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>协程并发下载器</title>
       <link href="/post/235e9d2f.html"/>
       <url>/post/235e9d2f.html</url>
