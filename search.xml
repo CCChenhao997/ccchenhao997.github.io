@@ -410,7 +410,7 @@
       <link href="/post/df4c6130.html"/>
       <url>/post/df4c6130.html</url>
       
-        <content type="html"><![CDATA[<ol><li><p>screen -S ch         # 建立一个名为ch的窗口</p></li><li><p>如果要关闭本地IDE，先同时按: control + A + D 退出当前窗口</p></li><li><p>关闭IDE</p></li><li><p>如果再要接连服务器，恢复之前的程序运行窗口，终端输入: screen -r ch</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<ol><li><code>screen -S ch</code>         # 建立一个名为ch的session</li><li>如果要关闭本地IDE，先同时按: control + A + D 退出当前窗口</li><li>关闭IDE</li><li>如果再要接连服务器，恢复之前的程序运行窗口，终端输入: <code>screen -r ch</code></li><li><code>screen -ls</code>命令查看全部session列表</li><li>使用<code>screen -S sessionName -X quit</code>，注：sessionName是要删除的session名字</li></ol>]]></content>
       
       
       <categories>
