@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Exploiting BERT for End-to-End Aspect-based Sentiment Analysis∗"><meta name="keywords" content="ABSA"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>Exploiting BERT for End-to-End Aspect-based Sentiment Analysis∗ | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66471139";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">1.</span> <span class="toc-text"> Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#model"><span class="toc-number">2.</span> <span class="toc-text"> Model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#experiment"><span class="toc-number">3.</span> <span class="toc-text"> Experiment</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dataset-and-settings"><span class="toc-number">3.1.</span> <span class="toc-text"> Dataset and Settings</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-results"><span class="toc-number">3.2.</span> <span class="toc-text"> Main Results</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#over-parameterization-issue"><span class="toc-number">3.3.</span> <span class="toc-text"> Over-parameterization Issue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finetuning-bert-or-not"><span class="toc-number">3.4.</span> <span class="toc-text"> Finetuning BERT or Not</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">101</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">88</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">18</span></a></div><!--乌龟--><!--<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>--><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=VVjsa_zTGhAUQ1yB5df-C5TI04O6AmJscZXp_OMAvMQ&cl=ffffff&w=a"></script></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">Exploiting BERT for End-to-End Aspect-based Sentiment Analysis∗</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-14</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/NLP/">NLP</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">445</span><span class="post-meta__separator">|</span><span>阅读时长: 2 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>Exploiting BERT for End-to-End Aspect-based Sentiment Analysis ∗</p>
+<ul>
+<li>EMNLP 2019</li>
+<li><a href="https://arxiv.org/abs/1910.00883" target="_blank" rel="noopener">https://arxiv.org/abs/1910.00883</a></li>
+</ul>
+<p>Xin Li 1 , Lidong Bing 2 , Wenxuan Zhang 1 and Wai Lam 1</p>
+<p>1 Department of Systems Engineering and Engineering Management The Chinese University of Hong Kong, Hong Kong</p>
+<p>2 R&amp;D Center Singapore, Machine Intelligence Technology, Alibaba DAMO Academy</p>
+<hr>
+<h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<p>ABSA Problems:</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA.assets/image-01.png" alt style="zoom:50%;">
+<p>本篇论文主要做了两个contribution：</p>
+<ol>
+<li>
+<p>探索BERT对于E2E-ABSA任务的潜力，并没有设计一个特定任务的网络结构.</p>
+</li>
+<li>
+<p>利用验证集的F1 score来选择模型，这在以前的工作中是没有的。</p>
+<blockquote>
+<p>We train the model up to 1500 steps. After training 1000 steps, we conduct model selection on the development set for very 100 steps according to the micro-averaged F1 score.</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="model"><a class="markdownIt-Anchor" href="#model"></a> Model</h2>
+<p>总体的模型设计：</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA.assets/image-02.png" alt style="zoom:50%;">
+<p>BERT as Embedding Layer</p>
+<p>Compared to the traditional Word2Vec- or GloVe-based embedding layer which only provides a single  context-independent  representation  for  each token, the BERT embedding layer takes the sentence as input and calculates the token-level representations using the information from the entire sentence.</p>
+<p>Design of Downstream Model</p>
+<p>作者共设计了四种下游模型的设计：</p>
+<ul>
+<li>
+<p>Linear Layer</p>
+</li>
+<li>
+<p>Recurrent Neural Networks (GRU)</p>
+</li>
+<li>
+<p>Self-Attention Networks</p>
+<ul>
+<li>
+<p>SAN</p>
+<blockquote>
+<p>SAN composed of a simple self-attention layer and residual connection.</p>
+</blockquote>
+</li>
+<li>
+<p>TFM</p>
+<blockquote>
+<p>TFM has the same architecture with the transformer encoder layer in the BERT.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Conditional Random Fields</p>
+<blockquote>
+<p>Different from the above mentioned neural models maximizing the token-level likelihood <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p(y_t |x_t )</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, the CRF-based model aims to ﬁnd the globally most probable tag sequence.</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="experiment"><a class="markdownIt-Anchor" href="#experiment"></a> Experiment</h2>
+<h3 id="dataset-and-settings"><a class="markdownIt-Anchor" href="#dataset-and-settings"></a> Dataset and Settings</h3>
+<p>We use the pre-trained “bert-base-uncased” model, where the number of transformer layers L = 12 and the hidden size dim h is 768. The learning rate is 2e-5. The batch size is set as 25 for LAPTOP and 16 for REST.</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA.assets/image-03.png" alt style="zoom:50%;">
+<h3 id="main-results"><a class="markdownIt-Anchor" href="#main-results"></a> Main Results</h3>
+<p><img src="/Users/chenhao/%E7%AC%94%E8%AE%B0/NLP/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA/BERT-E2E-ABSA.assets/image-04-4167267.png" alt></p>
+<h3 id="over-parameterization-issue"><a class="markdownIt-Anchor" href="#over-parameterization-issue"></a> Over-parameterization Issue</h3>
+<p>Does BERT-based model tend to overﬁt the small training set?</p>
+<p>Following this question, we train BERT-GRU, BERT-TFM and BERT-CRF up to 3000 steps on REST and observe the ﬂuctuation of the F1 measures on the development set.</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA.assets/image-05.png" alt style="zoom:50%;">
+<p>结果显示基于BERT的模型对于过拟合具有很好的鲁棒性。</p>
+<h3 id="finetuning-bert-or-not"><a class="markdownIt-Anchor" href="#finetuning-bert-or-not"></a> Finetuning BERT or Not</h3>
+<p>从实验结果上来看，显然，finetuning之后的模型表现的更好。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BERT-E2E-ABSA.assets/image-06.png" alt style="zoom:50%;">
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/6148945e.html">http://chenhao.space/post/6148945e.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ABSA/">ABSA</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/post/2603335a.html"><span>模型训练或加载过程中出现CUDA out of memory</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Just go go',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2020 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
