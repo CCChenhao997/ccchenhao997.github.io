@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>BN vs LN</title>
+      <link href="/post/e7ff2188.html"/>
+      <url>/post/e7ff2188.html</url>
+      
+        <content type="html"><![CDATA[<p>BatchNorm是对每个minibatch中所有数据的每个同一特征的维度上（即每一列）进行normalization标准化</p><p>LayerNorm是对每个minibatch中每一条数据的所有特征上（即每一行）进行进行normalization标准化</p><p>假如一个minibatch中有3条数据，每个数据有6个特征，也就是3行6列的tensor。</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/BatchNorm%20VS%20LayerNorm.assets/image-01.png" alt></p><p>BatchNorm会对6个特征维度分别计算出6个均值和方差，然后用这每个特征维度对应的两个均值和方差来分别对6个特征进行Normalization。</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/BatchNorm%20VS%20LayerNorm.assets/image-02.png" alt></p><p>而LayerNorm是分别对3个样本的6个特征求均值和方差，因此可以得到3个均值和方差，然后用这3个均值和方差对3个样本来做Normalization。</p><p>再假设每个样本的6个特征分别是【性别，年龄，体重，身高，肤色，发量】，LayerNorm是将这几个特征一起标准化，这显然不太合理。而BatchNorm则是对单个的特征进行标准化，但BatchNorm不适用于NLP中，因为如果我们将一批文本组成一个batch，那么BN的操作方向是，对每句话的<strong>第一个</strong>词进行操作。但语言文本的复杂性是很高的，任何一个词都有可能放在初始位置，且词序可能并不影响我们对句子的理解。而BN是<strong>针对每个位置</strong>进行标准化，这不符合NLP的规律。而LN则是针对一句话进行标准化的。</p><p><strong>BN的优点</strong>：</p><ul><li>可以容许较大的学习率</li><li>可以采用较差的初始化</li><li>正则化</li></ul><p><strong>BN的缺点</strong>：<br>计算均值和方差是在Batch上，如果Batchsize太小，计算均值和方差不能代表整个数据分布；如果Batchsize太大，会超过显存容量，训练较慢，更新很慢，一般选择32，64，128等。</p><p><strong>LN的优点</strong>：不需要批训练，在一条数据内部就能进行归一化。可以在Batchsize为1的网络和RNN中。此外，对CNN网络来说，BN比LN适合；对RNN网络来说，LN比BN更适合。</p><p>参考资料：</p><ol><li><a href="https://www.codercto.com/a/66349.html" target="_blank" rel="noopener">https://www.codercto.com/a/66349.html</a></li><li><a href="https://zhuanlan.zhihu.com/p/74516930" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/74516930</a></li><li><a href="https://www.jianshu.com/p/59aaaaab746a" target="_blank" rel="noopener">https://www.jianshu.com/p/59aaaaab746a</a></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> BatchNorm </tag>
+            
+            <tag> LayerNorm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Label Smoothing 标签平滑</title>
       <link href="/post/642eeb06.html"/>
       <url>/post/642eeb06.html</url>
