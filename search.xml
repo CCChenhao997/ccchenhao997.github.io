@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>C++/Java/Python横向大比较</title>
+      <link href="/post/8c1de134.html"/>
+      <url>/post/8c1de134.html</url>
+      
+        <content type="html"><![CDATA[<p>Data structure</p><ul><li>Array (fixed size)</li><li>Dynamic array</li><li>Linked list</li><li>TreeSet / TreeMap (ordered)</li><li>HashSet / HashMap (unordered)</li><li>Heap / Priority queue</li><li>Deque / Queue / Stack</li><li>Pair / Tuple</li><li>Customized data structure</li><li>auto type and type inference</li><li>Type Conversion</li><li>String</li></ul><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-01.png" alt></p><hr><p><strong>Array</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-02.png" alt></p><p><strong>Dynamic Array</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-03.png" alt></p><p><strong>HashTable</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-04.png" alt></p><p><strong>Priority queue / Heap</strong></p><p>C++默认是MaxHeap，而Java和Python默认是MinHeap。</p><p>C++的q.pop()是没有返回值的。</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-05.png" alt></p><p><strong>auto type and type inference</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-06.png" alt></p><p><strong>Type Conversion</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-07.png" alt></p><p><strong>String</strong></p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Algorithms/C%2B%2B%3AJava%3APython%E6%A8%AA%E5%90%91%E5%A4%A7%E6%AF%94%E8%BE%83.assets/image-08.png" alt></p><hr><p>Reference</p><ol><li><a href="https://www.bilibili.com/video/av46430001?p=1" target="_blank" rel="noopener">用什么语言刷题？C++/Java/Python 横向大比较 1 - CS大讲堂 EP8</a></li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Knowing What, How and Why：A Near Complete Solution for Aspect-based Sentiment Analysis</title>
       <link href="/post/9f298cd5.html"/>
       <url>/post/9f298cd5.html</url>
