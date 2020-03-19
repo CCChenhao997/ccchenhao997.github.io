@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="A Brief Introduction to Weakly Supervised Learning"><meta name="keywords" content="weakly supervised learning"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>A Brief Introduction to Weakly Supervised Learning | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66471139";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#incomplete-supervision"><span class="toc-number">1.</span> <span class="toc-text"> Incomplete Supervision</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#active-learning-without-human-intervention"><span class="toc-number">1.1.</span> <span class="toc-text"> Active Learning (Without Human Intervention)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#semi-supervised-learning-without-human-intervention"><span class="toc-number">1.2.</span> <span class="toc-text"> Semi-supervised Learning (Without Human Intervention)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inexact-supervision"><span class="toc-number">2.</span> <span class="toc-text"> Inexact Supervision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inaccurate-supervision"><span class="toc-number">3.</span> <span class="toc-text"> Inaccurate Supervision</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">4.</span> <span class="toc-text"> Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">5.</span> <span class="toc-text"> Reference</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">106</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">92</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">18</span></a></div><!--乌龟--><!--<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>--><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=VVjsa_zTGhAUQ1yB5df-C5TI04O6AmJscZXp_OMAvMQ&cl=ffffff&w=a"></script></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">A Brief Introduction to Weakly Supervised Learning</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-19</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/机器学习/">机器学习</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">2.8k</span><span class="post-meta__separator">|</span><span>阅读时长: 8 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>A Brief Introduction to Weakly Supervised Learning</p>
+<p>Zhi-Hua Zhou  2018</p>
+<p>本篇文章主要介绍了三种典型的弱监督学习：</p>
+<ul>
+<li><strong>Incomplete Supervision</strong> where only a subset of training data are given with labels;</li>
+<li><strong>Inexact Supervision</strong> where the training data are given with only coarse-grained labels;</li>
+<li><strong>Inaccurate Supervision</strong> where the given labels are not always ground-truth.</li>
+</ul>
+<p>在监督学习中，训练数据包含了大量训练样本，训练样本由两部分组成：</p>
+<ul>
+<li>a feature vector (or called instance) describing the event/object</li>
+<li>a label indicating the ground-truth output</li>
+</ul>
+<p>在分类问题中，标签表示训练样本属于哪一类；在回归问题中，标签是训练样本对应的真实值。</p>
+<p>由于数据标注成本太高，机器学习技术需要在弱监督下工作。下面介绍典型的三种弱监督学习方式：</p>
+<ol>
+<li>Incomplete Supervision</li>
+</ol>
+<p>以图像分类来举例，我们很容易从网上搜集到大量的图片，但是由于人工成本，只有一小部分的图片被标注类别标签。</p>
+<ol start="2">
+<li>Inexact Supervision</li>
+</ol>
+<p>再以图像分类为例，我们需要的是对于每一张图片上的每一个对象都标注有标签（细粒度标签），但是我们仅有这张图片的标签（粗粒度标签）。</p>
+<ol start="3">
+<li>Inaccurate Supervision</li>
+</ol>
+<p>这种情况下，一些图片的标签并不是准确的，比如这是一张“狗”的图片，而人工标错了标成了“猫”的图片，或者是一些图片很难去被分类成是哪一类。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-01.png" alt style="zoom:50%;">
+<hr>
+<h2 id="incomplete-supervision"><a class="markdownIt-Anchor" href="#incomplete-supervision"></a> Incomplete Supervision</h2>
+<p>这里主要介绍了两种方法：</p>
+<ul>
+<li><strong>Active Learning</strong></li>
+<li><strong>Semi-supervised Learning</strong></li>
+</ul>
+<p>Active learning 假设有一个 “oracle”，比如人类专家，可以为无标签的实例查询到真实的标签。相反，semi-supervised learning 尝试去自动化地利用没有标签的数据和有标签的数据共同去提高学习的性能，而没有人工的干预。</p>
+<p>有一种特殊的 semi-supervised learning 叫做 <strong>transductive learning</strong>，它与 (pure) semi-supervised learning 的主要区别在于它们对测试数据的不同假设，即训练模型要预测的数据。Transductive learning 假设测试数据是预先给定的，目标是优化在测试数据上的性能；换句话说，也就是将无标签的数据当作测试数据。Pure semi-supervised learning 假定测试数据未知，无标签的数据不一定是测试数据。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-02.png" alt style="zoom:50%;">
+<hr>
+<h3 id="active-learning-without-human-intervention"><a class="markdownIt-Anchor" href="#active-learning-without-human-intervention"></a> Active Learning (Without Human Intervention)</h3>
+<p>目标：减少查询的次数，这样训练一个好模型的标注成本就可以最小化。</p>
+<p>在给定一组带标签数据和大量无标签数据的情况下，active learning 试图选择<strong>最有价值</strong>的无标签实例进行查询。</p>
+<p>有两种广泛使用的选择标准：<strong>informativeness (信息性)</strong> 和 <strong>representativeness (代表性)</strong>。</p>
+<p>Informativeness 衡量无标签的实例在多大程度上有助于减少统计模型的不确定性，而 representativeness 衡量无标签实例在多大程度上有助于表示输入模式的结构。</p>
+<p><strong>Uncertainty sampling</strong> 和 <strong>query-by-committee</strong> 是基于 informativeness 的两种典型的方法。前者训练单个学习模型，然后根据学习模型查询最不确定的未标记实例；后者生成多个学习模型，然后根据这些模型查询出最具有分歧的无标签实例（投票法）。</p>
+<p>缺点：严重依赖带标签数据来构造初始模型来选择需要查询的实例，当带标签的实例数量较少时，性能往往不稳定。</p>
+<p>基于 representativeness 的方法旨在利用无标签数据的聚类结构，通常是通过聚类方法。</p>
+<p>缺点：性能很大程度上取决于以无标签数据为主的聚类结果，尤其是在只有少数带标签数据的情况下。</p>
+<p>因此，最近的一些 active learning 方法试图利用 informativeness 和 representativeness。有很多关于 active learning 的理论研究，例如，已经证明了对于可实现的情况（假设类中存在完全分离数据的假设），通过主动学习可以获得样本复杂度的指数级的提升。对于不可实现的情况（由于噪声的存在，假设类中的任何假设都无法将数据完全分离），研究表明，在没有噪声模型假设的情况下，active learning 的下界与 passive learning 的上界相匹配，即 active learning 并不能提供太多帮助。通过假设 Tsybakov 噪声模型，已证明可以对有界噪声进行指数级的改进。 如果可以利用某些特殊的数据特征（例如多视图结构），则甚至可以对无界噪声实现指数级的改进。 换句话说，即使对于困难的情况，精致设计的 active learning 仍然会有帮助。</p>
+<hr>
+<h3 id="semi-supervised-learning-without-human-intervention"><a class="markdownIt-Anchor" href="#semi-supervised-learning-without-human-intervention"></a> Semi-supervised Learning (Without Human Intervention)</h3>
+<p>为什么没有标签的数据可以帮助构建预测模型？下面给出一个直观的解释：</p>
+<p>假如我们需要做正、负二分类预测，我们所能做的只是随机猜测，因为测试数据点正好位于两个标签数据点之间；如果允许我们观察一些无标签的数据点，如图中的灰色数据点，我们可以很有把握地预测测试数据点为正。在这里，尽管无标签的数据点没有显式地包含标签信息，但它们隐式地传递了一些关于数据分布的信息，这有助于预测的建模。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-03.png" alt style="zoom:50%;">
+<p>实际上，在 semi-supervised learning 中有两个基本的假设，即 <strong>cluster assumption</strong> 和 <strong>manifold assumption</strong>（流形假设），两者都是关于数据分布的。前者假设数据具有固定的簇结构，因此，属于同一簇的实例具有相同的类标签。后者假设数据是位于一个流形上的，因此，附近的实例也有类似的预测。</p>
+<p>两种假设的本质在于认为相似的数据点应该具有相似的输出，而未标记的数据可以帮助揭示哪些数据点相似。</p>
+<p>有四种主要的 semi-supervised learning 方法，分别是 <strong>generative methods (生成式方法)</strong>、<strong>graph-based methods (基于图的方法)</strong>、<strong>low-density separation (低密度分离方法)</strong>、<strong>disagreement-based methods (基于分歧的方法)</strong>。</p>
+<p>Generative methods 生成式方法假设带标签数据和无标签数据都是从同一个固有模型生成的。因此，无标签实例的标签可以被视为模型参数的缺失值，并通过EM (expectation maximization) 算法等方法进行估计。这些方法因使用不同的生成模型拟合数据而有所不同。为了获得良好的性能，通常需要领域知识来确定适当的通用模型。也有人试图将生成式方法和判别式方法的优势结合起来。</p>
+<p>Graph-based methods 基于图的方法构造一个图，其中节点对应于训练的实例，边对应于实例之间的关系（通常是某种相似性或距离），然后根据一些标准在图上传播标签信息。显然，性能在很大程度上取决于图是如何构造的。如果有m个数据点，这种方法通常需要 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>m</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(m^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的存储空间和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>m</mi><mn>3</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(m^3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 的计算复杂度，也因此很缺乏扩展性。</p>
+<p>Low-density separation methods 低密度分离方法强制分类边界跨越输入空间中密度较小的区域。最著名的代表是 S3VMs (semi-supervised support vector machines)。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-04.png" alt style="zoom:50%;">
+<p>很明显，S3VMs试图识别一个跨越低密度区域的分类边界，同时保持带标签数据的正确分类。这样的目标可以通过尝试不同方式对无标签数据点的不同标签分配来实现，从而转变为一个复杂的优化问题。</p>
+<p>Disagreement-based methods 基于分歧的方法通过产生多个模型，通过多个模型的合作给数据打标签，经典的Ensemble思想的运用，代表性方法是co-training。模型预测的标签称为 pseudo-labels 伪标签。</p>
+<p>但是，semi-supervised learning 并不是在所有的场景下都有效，利用未标记的数据自然会导致不止一个模型选项，选择不当可能会导致性能下降。 使半监督学习“更安全”的基本策略是通过选择 ensemble 机制来优化选项中最坏情况下的性能。</p>
+<hr>
+<h2 id="inexact-supervision"><a class="markdownIt-Anchor" href="#inexact-supervision"></a> Inexact Supervision</h2>
+<p>这里主要介绍了 multi-instance learning (多实例学习) 这部分我没怎么看太懂。下面引用了别人写的：</p>
+<blockquote>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-05.jpg" style="zoom:67%;">
+<p>实际上，几乎所有监督学习算法都有其多实例对等体。</p>
+<p>训练数据集中每一个数据看做一个包(Bag)，每个包由多个实例(Instance)构成，每个包有一个可见的标签，在上图例子中，假设这个包大小为8<em>8，如果我们用size为2</em>2的图片包生成器（Image bag generators）去取得实例，那么我们可以得到16个实例（Instance）。</p>
+<p>显而易见，我们这个包是有标签的（左图），老虎，包中的每个实例是没有标签的（右图）。</p>
+<p>多实例学习假设每一个正包必须存在至少一个关键实例。这意味着，假设这个例子中关键实例是 instance 9，那么这个包的标签为正（positive）。多实例学习的过程就是通过模型对包及其包含的多个实例进行分析预测得出包的标签。多实例学习广泛存在在真实世界中，并且应用场景非常广泛。</p>
+</blockquote>
+<hr>
+<h2 id="inaccurate-supervision"><a class="markdownIt-Anchor" href="#inaccurate-supervision"></a> Inaccurate Supervision</h2>
+<p>一个典型的场景就是带噪学习(learning with label noise)。有许多理论研究，其中大多数假设随机分类噪声，即标签受到随机噪声的影响。在实践中，一个基本的想法是识别可能被错误标记的样本，然后尝试进行一些更正。</p>
+<p>例如，数据编辑方法构造一个关系邻接图，其中每个节点对应于一个训练样本，并且连接两个具有不同标签的节点的边称为 cut edge。然后，测量 cut edge 的权重统计数据，直觉认为如果样本与许多 cut edge 相关联，则该样本可疑。可疑样本可被删除或重新标注标签。值得一提的是，这种方法通常依赖于邻接信息的查询，因此，在高维特征空间中，它们的可靠性较低，因为在数据稀疏的情况下，邻域的识别通常不太可靠。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/A%20Brief%20Introduction%20to%20Weakly%20Supervised%20Learning.assets/image-06.png" alt style="zoom:50%;">
+<p>另外还介绍了关于 crowdsourcing (外包)，这里就不介绍了。</p>
+<hr>
+<h2 id="conclusion"><a class="markdownIt-Anchor" href="#conclusion"></a> Conclusion</h2>
+<p>在实际的任务重，搜集监督信息是需要耗费很多成本的，因此，通常希望能够进行弱监督学习。</p>
+<p>本文介绍了三种典型的弱监督学习：incomplete, inexact and inaccurate supervision。在实际中，它们经常会共同出现。所以弱监督学习的研究在机器学习领域还是非常重要的。</p>
+<hr>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
+<ol>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/81404885" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/81404885</a></p>
+</li>
+<li>
+<p><a href="https://zhpmatrix.github.io/2019/07/14/weak-supervision/" target="_blank" rel="noopener">https://zhpmatrix.github.io/2019/07/14/weak-supervision/</a></p>
+</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/e2f24bfd.html">http://chenhao.space/post/e2f24bfd.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/weakly-supervised-learning/">weakly supervised learning</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/post/8c1de134.html"><span>C++/Java/Python横向大比较</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Just go go',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2020 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
