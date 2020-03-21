@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>WXSS</title>
+      <link href="/post/76c599d6.html"/>
+      <url>/post/76c599d6.html</url>
+      
+        <content type="html"><![CDATA[<p>微信小程序开发框架—WXSS</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-01.png" style="zoom:50%;"><p>WXSS基于CSS的基础上做了以下修改或补充：</p><ul><li>尺寸单位 rpx</li><li>样式导入</li><li>内联样式</li><li>选择器</li></ul><p>rpx：</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-02.png" style="zoom:50%;"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-03.png" style="zoom:50%;"><p>样式导入：</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-04.png" style="zoom:50%;"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-05.png" style="zoom:50%;"><p>内联样式：</p><p>一般把静态样式写入class属性中，动态样式写入style属性中。</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-06.png" style="zoom:50%;"><p>选择器：</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-07.png" style="zoom:50%;"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXSS.assets/image-08.png" style="zoom:50%;">]]></content>
+      
+      
+      <categories>
+          
+          <category> 微信小程序 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wxss </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>WXML</title>
       <link href="/post/2f8cabfc.html"/>
       <url>/post/2f8cabfc.html</url>
