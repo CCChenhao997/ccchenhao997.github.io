@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>小程序及代码结构简介</title>
+      <link href="/post/f753d52.html"/>
+      <url>/post/f753d52.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="小程序的特点"><a class="markdownIt-Anchor" href="#小程序的特点"></a> 小程序的特点：</h3><ul><li>触手可及</li><li>不占内存</li><li>无需安装卸载</li></ul><hr><h3 id="代码结构"><a class="markdownIt-Anchor" href="#代码结构"></a> 代码结构</h3><table>    <tr>        <td><center><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-01.png" style="zoom:50%;">        </center></td>        <td><center><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-02.png" style="zoom:50%;">        </center></td>    </tr></table><ul><li>app.js 注册微信小程序应用；</li><li>app.json 进行微信小程序的全局配置，包括网络请求的超时时间、一些窗口的表现、各个页面的注册的路径；</li><li>app.wxss 设置微信小程序全局的样式；</li><li>pages 里面存放的是微信小程序所有的小程序页面，每个小程序页面最多由四个文件组成，分别是js文件、json文件、wxml文件和wxss文件。<ul><li>js文件帮我们去处理微信小程序页面的逻辑和一些数据交互，</li><li>json文件是帮我们去配置微信小程序页面的配置信息，</li><li>wxml文件是用来帮我们展示小程序页面的一些元素和内容，</li><li>wxss文件是帮我们去设置小程序页面这些元素的样式。</li></ul></li><li>utils.js 存放一些工具函数，可以达到我们代码复用的目的；</li><li>project.config.json 保存微信开发者工具的配置信息。</li></ul><p>app.json 全局配置与页面的.json 页面配置，它们配置哪些属性和内容呢？</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-03.png" style="zoom:67%;"><p>注：页面的配置优先级 &gt; 全局的配置优先级</p><hr><h3 id="调试器"><a class="markdownIt-Anchor" href="#调试器"></a> 调试器</h3><p>调试器模块各个面板的作用：</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-04.png" alt></p><ul><li>Console 打印小程序页面的一些调试log</li><li>Source 会列出微信小程序页面的所有脚本文件，我们可以对这些脚本文件进行一个断点调试</li><li>Network 展示各个网络请求的状态信息以及请求资源的响应数据等</li><li>Storage 当我们在小程序里面通过调用 wx.setStorage 和 wx.setStorageSync 函数设置缓存时，我们可以动态地去修改这些缓存数据</li><li>AppData 时微信小程序页面上真实展示的数据，我们也可以在这里动态地修改来查看小程序页面在模拟器上不同设备的兼容性的情况</li><li>Wxml 展示了微信小程序页面的各个组件元素，以及我们可以通过对这些组件元素对它进行样式属性的修改</li><li>Sensor 地理位置信息和设备旋转角度的展示，可以动态地去修改地理位置信息来模拟小程序页面在不同的地理位置下的表现</li></ul><hr><h3 id="rpx与px"><a class="markdownIt-Anchor" href="#rpx与px"></a> rpx与px</h3><p>rpx与px的区别：</p><p>rpx时一个响应式的屏幕像素，rpx单位是微信小程序中css的尺寸单位，rpx可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx=0.5px=1物理像素。</p><p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-05.png" alt></p><hr><h3 id="小程序开发框架基本构成"><a class="markdownIt-Anchor" href="#小程序开发框架基本构成"></a> 小程序开发框架—基本构成</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8F%8A%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B.assets/image-06.png" style="zoom:40%;"><p>WXS是对WXML能力增强的一种脚本语言，可以把请求到的数据进行过滤或计算处理，帮助WXML快速构建出页面的内容结构。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 微信小程序 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 小程序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>A Brief Introduction to Weakly Supervised Learning</title>
       <link href="/post/e2f24bfd.html"/>
       <url>/post/e2f24bfd.html</url>
