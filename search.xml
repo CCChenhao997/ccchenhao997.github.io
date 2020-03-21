@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>WXML</title>
+      <link href="/post/2f8cabfc.html"/>
+      <url>/post/2f8cabfc.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="微信小程序开发框架wxml"><a class="markdownIt-Anchor" href="#微信小程序开发框架wxml"></a> 微信小程序开发框架—WXML</h3><p>WXML（WeiXin Markup Language）是框架设计的⼀套标签语⾔，结合组件、WXS和事件系统，可以构建出⻚页⾯的结构。</p><p>语法：</p><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">标签名</span> 属性名=<span class="string">"属性名1"</span> 属性名=<span class="string">"属性名2"</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">标签名</span>&gt;</span></span><br></pre></td></tr></table></figure><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-01.png" style="zoom:50%;"><hr><h3 id="wxml的四个语言特性"><a class="markdownIt-Anchor" href="#wxml的四个语言特性"></a> WXML的四个语言特性</h3><ul><li>数据绑定</li><li>列表渲染</li><li>条件渲染</li><li>模版引用</li></ul><p>数据绑定：可以动态改变界面显示的数据的能力</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-02.png" style="zoom:50%;"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-03.png" style="zoom:50%;"><p>flag为false时，hidden为false，所以小程序页面上显示出&quot;Hidden&quot;，若flag为true，则页面上啥也不显示。</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-04.png" style="zoom:50%;"><hr><h3 id="微信小程序开发框架属性"><a class="markdownIt-Anchor" href="#微信小程序开发框架属性"></a> 微信小程序开发框架—属性</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-05.png" style="zoom:50%;"><hr><h3 id="微信小程序开发框架列表渲染"><a class="markdownIt-Anchor" href="#微信小程序开发框架列表渲染"></a> 微信小程序开发框架—列表渲染</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-06.png" style="zoom:50%;"><p>两个变量：item和index</p><p>index指的是当前元素在列表中的下标，item表示列表中的当前元素。</p><p>wx:key 中的key代表列表中项目的唯一标识符，当数据改变触发渲染层重新渲染的时候，会校正带有 key 的组件，框架会确保他们被重新排序，而不是重新创建，以确保使组件保持自身的状态，并且提高列表渲染时的效率。</p><p>block标签不是一个组件，只是一个包装元素，在页面渲染的时候block标签是不会被渲染的。</p><hr><h3 id="微信小程序开发框架条件渲染"><a class="markdownIt-Anchor" href="#微信小程序开发框架条件渲染"></a> 微信小程序开发框架—条件渲染</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-07.png" style="zoom:50%;"><p>wx:if结构有更高的切换消耗，而hidden有更高的初始化渲染消耗。如果元素需要频繁切换显示的话，使用hidden更好。</p><hr><h3 id="微信小程序开发框架模板引用"><a class="markdownIt-Anchor" href="#微信小程序开发框架模板引用"></a> 微信小程序开发框架—模板引用</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-08.png" style="zoom:50%;"><p><code>&lt;template&gt;</code> 标签中定义模版</p><p>文件引用：</p><ul><li>import：只能引入文件中的模版代码块</li><li>include：将目标文件内模版代码块以外的代码都引入</li></ul><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-09.png" style="zoom:50%;"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/WXML.assets/image-10.png" style="zoom:50%;">]]></content>
+      
+      
+      <categories>
+          
+          <category> 微信小程序 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> wxml </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>小程序及代码结构简介</title>
       <link href="/post/f753d52.html"/>
       <url>/post/f753d52.html</url>
