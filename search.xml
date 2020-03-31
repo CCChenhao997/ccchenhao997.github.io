@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction</title>
+      <link href="/post/752e6d60.html"/>
+      <url>/post/752e6d60.html</url>
+      
+        <content type="html"><![CDATA[<p>Double Embeddings and CNN-based Sequence Labeling for Aspect Extraction</p><p>ACL 2018 <a href="https://www.aclweb.org/anthology/P18-2094/" target="_blank" rel="noopener">[paper]</a></p><p>Hu Xu 1 , Bing Liu 1 , Lei Shu 1 and Philip S. Yu 1,2</p><p>1 Department of Computer Science, University of Illinois at Chicago, Chicago, IL, USA</p><p>2 Institute for Data Science, Tsinghua University, Beijing, China</p><hr><p>本篇文章提出了一种新型但简单的用于 asepct extraction 的 CNN 模型，使用了两种类型的预训练 embeddings。</p><hr><h2 id="model"><a class="markdownIt-Anchor" href="#model"></a> Model</h2><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/DE-CNN.assets/image-01.png" style="zoom:50%;"><p>如上图所示，模型有两个 embedding 层，四个 CNN 层，一个全连接层和softmax用于输出序列标注的标签。labeling space 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mo stretchy="false">{</mo><mi>B</mi><mo separator="true">,</mo><mi>I</mi><mo separator="true">,</mo><mi>O</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">y=\{B,I,O\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mclose">}</span></span></span></span> 。注意模型中红色的部分是为了对齐而设置的padding，且为零向量。</p><p>每个卷积核有固定设置固定的 kernel size <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi><mo>=</mo><mn>2</mn><mi>c</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k=2c+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>，卷机操作和 ReLU 激活操作如下：</p><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/DE-CNN.assets/image-02.png" style="zoom:50%;"><p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mo>−</mo><mi>t</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">l-th</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span></span></span></span> 的 CNN 层，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 表示句子中每个词的位置。stride step 设为1.第一层的 CNN 有两个不同的卷积核尺寸，而剩下的三层使用一个卷积核尺寸。</p><blockquote><p>We apply dropout after the embedding layer and each ReLU activation.</p></blockquote><p>为啥作者要在这里使用 dropout？我在网上看别人说一般不再卷积层后加 dropout，因为卷积设计的参数并不多，而一般会在全连接层后使用dropout。</p><p>另外，作者提到了为什么不使用 max-pooling 的原因：</p><blockquote><p>Note that we do not apply any max-pooling layer after convolution layers because a sequence labeling model needs good representations for every position and max-pooling operation mixes the representations of different positions, which is undesirable</p></blockquote><hr><h2 id="experiments"><a class="markdownIt-Anchor" href="#experiments"></a> Experiments</h2><h3 id="datasets"><a class="markdownIt-Anchor" href="#datasets"></a> Datasets</h3><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/DE-CNN.assets/image-03.png" style="zoom:50%;"><p>General-purpose embeddings: glove.840B.300d</p><p>Domain-speciﬁc embeddings: 分别使用 laptop reviews from the Amazon Review Dataset 和 restaurant review corpus from the Yelp Review Dataset Challenge 当作语料，通过 fastText 训练 word embedding。</p><hr><h2 id="results"><a class="markdownIt-Anchor" href="#results"></a> Results</h2><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/DE-CNN.assets/image-04.png" style="zoom:50%;"><p>对于实验结果和模型的对比，作者分析的很细致，有兴趣的可以看原论文。这里只说下作者发现 DE-CNN 的两种主要错误类型：</p><ol><li>标注不一致。例如，在 restaurant 数据集中，相同的 aspect 有时被标注，有时候却没有被标注。</li><li>在测试数据中存在未见过的 aspects，要求能够提取出连词 “and” 的语义。比如，如果 A 是一个 aspect，当出现 “A and B”，B应该也被提取出来，但在模型中并没有实现。</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> ABSA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ATE </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DOER：Dual Cross-Shared RNN for Aspect Term-Polarity Co-Extraction</title>
       <link href="/post/2e7254eb.html"/>
       <url>/post/2e7254eb.html</url>
@@ -20,7 +45,7 @@
       
         <tags>
             
-            <tag> ABSA </tag>
+            <tag> E2E-ABSA </tag>
             
         </tags>
       
@@ -183,7 +208,7 @@
       
         <tags>
             
-            <tag> ABSA </tag>
+            <tag> Complete ABSA </tag>
             
         </tags>
       
@@ -260,7 +285,7 @@
       
         <tags>
             
-            <tag> ABSA </tag>
+            <tag> E2E-ABSA </tag>
             
         </tags>
       
@@ -462,7 +487,7 @@
       
         <tags>
             
-            <tag> ABSA </tag>
+            <tag> E2E-ABSA </tag>
             
         </tags>
       
@@ -587,7 +612,9 @@
       
         <tags>
             
-            <tag> Aspect Term Extraction </tag>
+            <tag> ATE </tag>
+            
+            <tag> OTE </tag>
             
         </tags>
       
@@ -612,7 +639,7 @@
       
         <tags>
             
-            <tag> Aspect Term Extraction </tag>
+            <tag> ATE </tag>
             
         </tags>
       
@@ -637,7 +664,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> ABSA </tag>
             
         </tags>
       
@@ -662,7 +689,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> ABSA </tag>
             
         </tags>
       
@@ -762,7 +789,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> ABSA </tag>
             
         </tags>
       
@@ -787,7 +814,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> Emotion Classification </tag>
             
         </tags>
       
@@ -1014,7 +1041,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> ABSA </tag>
             
         </tags>
       
@@ -1039,7 +1066,7 @@
       
         <tags>
             
-            <tag> Aspect Sentiment Classification </tag>
+            <tag> ABSA </tag>
             
         </tags>
       
