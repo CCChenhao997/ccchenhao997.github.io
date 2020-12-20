@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Convolution over Hierarchical Syntactic and Lexical Graphs for Aspect Level Sentiment Analysis"><meta name="keywords" content="ABSA"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>Convolution over Hierarchical Syntactic and Lexical Graphs for Aspect Level Sentiment Analysis | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><link rel="dns-prefetch" href="http://ta.qq.com"><script>(function() {
+   var hm = document.createElement("script");
+   hm.src = "https://tajs.qq.com/stats?sId=66471139";
+   var s = document.getElementsByTagName("script")[0];
+   s.parentNode.insertBefore(hm, s);
+ })();</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#motivations"><span class="toc-number">1.</span> <span class="toc-text"> Motivations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solution"><span class="toc-number">2.</span> <span class="toc-text"> Solution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hierarchical-syntactic-graph-construction"><span class="toc-number">3.</span> <span class="toc-text"> Hierarchical syntactic graph construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hierarchical-lexical-graph-construction"><span class="toc-number">4.</span> <span class="toc-text"> Hierarchical lexical graph construction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proposed-model"><span class="toc-number">5.</span> <span class="toc-text"> Proposed Model</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#getting-initial-sentence-representation"><span class="toc-number">5.1.</span> <span class="toc-text"> Getting Initial Sentence Representation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#refining-sentence-representation"><span class="toc-number">5.2.</span> <span class="toc-text"> Reﬁning Sentence Representation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#generating-aspect-oriented-representation"><span class="toc-number">6.</span> <span class="toc-text"> Generating Aspect-oriented Representation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#experiments"><span class="toc-number">7.</span> <span class="toc-text"> Experiments</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">170</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">117</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">21</span></a></div><!--乌龟--><!--<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>--><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--><script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?d=VVjsa_zTGhAUQ1yB5df-C5TI04O6AmJscZXp_OMAvMQ&cl=ffffff&w=a"></script></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">Convolution over Hierarchical Syntactic and Lexical Graphs for Aspect Level Sentiment Analysis</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-12-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/NLP/">NLP</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">1.8k</span><span class="post-meta__separator">|</span><span>阅读时长: 6 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p><strong>Convolution over Hierarchical Syntactic and Lexical Graphs for Aspect Level Sentiment Analysis</strong></p>
+<p>EMNLP 2020 <a href="https://www.aclweb.org/anthology/2020.emnlp-main.286/" target="_blank" rel="noopener">[link]</a></p>
+<p>Mi Zhang, Tieyun Qian</p>
+<p>School of Computer Science, Wuhan University, China</p>
+<hr>
+<h3 id="motivations"><a class="markdownIt-Anchor" href="#motivations"></a> Motivations</h3>
+<p><strong>1. The frequently co-occurred words represent the collocations in linguistics.</strong></p>
+<p>**频繁出现的词对代表着语言学中的固定搭配。**例如，在句子“<strong>food</strong> was okay, nothing special”中，单词“nothing special”对在 SemEval 训练集中出现了 5 次，表示负极性。如果没有这样的全局信息来抵消“okay”的正面影响，基于语法的方法将对“food”做出错误的预测。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img01.png" alt="img" style="zoom:40%;">
+<p><strong>2. Each type of syntactic dependency denotes a speciﬁc relation.</strong></p>
+<p><strong>每种类型的句法依存关系都表示一种特定的关系</strong>。例如，在“i like hamburgers”中，“i like”是 nsubj（名词主语）关系，而“like hamburgers”是 dobj（直接宾语）关系。如果 nsubj 关系和 dobjs 关系得到同等对待，我们将无法区分动作“like”的主语和宾语。</p>
+<blockquote>
+<p>疑问🤔️：</p>
+<p>2020 ACL R-GAT 这篇论文中已经在GAT中用过句法依赖类型的信息，所以本篇论文使用句法依赖的类型还算创新点？（只不过他们用的方法不一样，但他也并没有说明已经有前人用过了）</p>
+</blockquote>
+<hr>
+<h3 id="solution"><a class="markdownIt-Anchor" href="#solution"></a> Solution</h3>
+<p>提出一种新颖的网络模型，用于有效地<strong>融合词对共现信息和句法依存信息</strong>。建立了用于<strong>训练语料库的全局词汇图</strong>，和<strong>每个句子的局部层次句法图和局部层次词汇图</strong>。</p>
+<ol>
+<li>
+<p>全局词汇图是我们<strong>首次提出来</strong>用于 ASC 任务：对语料库级别的单词共现信息进行编码，其中节点是单词，边表示训练语料库中两个单词节点之间的频率。</p>
+</li>
+<li>
+<p>我们还在局部句法图和词汇图上建立<strong>概念层次结构</strong>，以区分不同类型的依存关系或词对共现关系。</p>
+</li>
+</ol>
+<p>注：这里的全局指的是训练语料级的，局部指的是单一训练样本级的。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img02.png" alt="img" style="zoom:50%;">
+<hr>
+<h3 id="hierarchical-syntactic-graph-construction"><a class="markdownIt-Anchor" href="#hierarchical-syntactic-graph-construction"></a> Hierarchical syntactic graph construction</h3>
+<p><strong>问题</strong>：由于解析树中存在大量的关系，直接使用一个依赖关系作为图中的一种边可能会产生类似<strong>解析错误之类的噪声</strong>。</p>
+<p><strong>方法</strong>：**将所有依赖关系类型（36种）分为5种关系类型，**<strong>名词、动词、形容词、副词、其它。</strong></p>
+<p><strong>层次句法图</strong> <strong>HSG</strong>，可以表示为 {Vs , Es , Rs }，<strong>Vs表示节点集合，Es表示边集合，Rs表示关系集合。Es中的每一条边都可以对应上Rs的一个关系标签。</strong></p>
+<p>注：Rs中包含五种关系标签，即名词、动词、形容词、副词、其它。</p>
+<hr>
+<h3 id="hierarchical-lexical-graph-construction"><a class="markdownIt-Anchor" href="#hierarchical-lexical-graph-construction"></a> Hierarchical lexical graph construction</h3>
+<p><strong>全局词汇图 LG^T ：包含一个节点集合 V^T 和一个边集合 E^T 。E^T 中的每条边 e 表示词对在训练语料中的共现频次。</strong></p>
+<p><strong>局部词汇图 LG^d：节点表示句子中的每个词，每条边表示句子中两个词的共现（从全局词汇图得到）。</strong></p>
+<p>问题：词对在训练语料中出现的频次差异很大，有点只出现一两次，而有点却出现很多次。（单词频度服从 log-normal 分布）</p>
+<p>方法：在词共现关系上增加一个词汇概念层次Rd。将词对按其共现频度划分成区间</p>
+<p><strong>2^0, 2^1, [2^1 + 1, 2^(k+1)] (1 &lt;= k &lt;= 5), others. 一共八个区间。</strong></p>
+<p><strong>层次全局词汇图 HLG^T：可以表示为 {Vd^T, Ed^T, Rd}。</strong></p>
+<hr>
+<h3 id="proposed-model"><a class="markdownIt-Anchor" href="#proposed-model"></a> Proposed Model</h3>
+<h4 id="getting-initial-sentence-representation"><a class="markdownIt-Anchor" href="#getting-initial-sentence-representation"></a> Getting Initial Sentence Representation</h4>
+<p><strong>1.</strong> <strong>GCN Embedding</strong></p>
+<p>希望将语料库特有的词汇信息编码进句子的表示形式中，使用层次全局词汇图 HLG^T 获得整个训练集的词汇嵌入矩阵。然后，通过该矩阵得到句子序列 S 的 GCN embedding。</p>
+<p><strong>2.</strong> <strong>Bi-LSTM Embedding</strong></p>
+<p>使用BiLSTM将序列信息编码进句子的表示形式中。其次，更接近方面词的词汇可能会对判断其情感做出更大的贡献。我们计算从每个上下文词到相应方面词的绝对距离，并获得 S 的位置序列。S 中的每个单词都含有预训练单词 embedding 和位置 embedding。具有上述表示形式的句子 S 输入到 Bi-LSTM 层以获得 Bi-LSTM embedding</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img03.png" alt="img" style="zoom:60%;">
+<h4 id="refining-sentence-representation"><a class="markdownIt-Anchor" href="#refining-sentence-representation"></a> Reﬁning Sentence Representation</h4>
+<p>以上述 GCN embedding 和 Bi-LSTM embedding 作为初始句子表示，我们进一步利用<strong>局部层次词汇图</strong>和<strong>层次句法图</strong>以获得句子 S 的更好表示。基本思想是让这两个图在经过精心设计的 <strong>HierAgg (<strong>Hierarchical Aggregation</strong>)</strong> 模块中深入交互。</p>
+<p>HierAgg 是一个多层结构，其中每层包括一个交叉网络以融合 GCN 和 Bi-LSTM embedding，以及一个 Bi-level GCN 以在局部层次句法和局部层次词汇图上进行卷积。多层结构确保了在不同级别执行的不同类型信息的协作。</p>
+<p><strong>1.</strong> <strong>Cross Network</strong></p>
+<p>在交叉网络的每一层中，我们使用以下公式更新融合的嵌入。每层中的融合嵌入将用作 Bi-level GCN 中两个图的输入节点表示。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img04.png" alt="img" style="zoom:50%;">
+$$
+\Large f^l = f^0 f^{l-1} w^l + b^l + f^{l-1} \\
+\Large f^0 = x \oplus y
+$$
+**2. Bi-level GCN**
+<p>由于我们的局部句法图和词汇图包含概念层次结构，因此普通 GCN 无法在带有标记边的图上卷积。为了解决该问题，我们提出了一个用于合并不同关系类型的双层 GCN。给定一个带有两个图的句子，我们将使用两个聚合操作执行双层卷积。</p>
+<p>**第一次聚合（低级）：**将具有相同关系类型的节点聚合到虚拟节点，然后在 GCN 中使用相同的归一化隐藏特征总和作为聚合函数来获取虚拟节点嵌入。如右图，&quot;ok&quot;和&quot;nothing&quot;具有相同的标签，因此它们聚合到一个虚拟节点S4；类似地，&quot;food&quot;聚合成虚拟节点S1。</p>
+<p>**第二次聚合（高级）：**将所有虚拟节点及其特定关系聚合在一起。使用平均聚合函数针对不同关系类型（虚拟节点）更新目标词 t 的表示形式：</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img05.png" alt="img" style="zoom:50%;">
+$$
+\Large h^l_t = ReLU(W_t · (\oplus_r \widetilde{h}_t^{l,r}))
+$$
+<p><strong>3. Finally aggregated embedding</strong></p>
+<p>我们分别在局部层次词汇图和层次句法图上进行第一次和第二次聚合以获得精炼的句子表示形式，将其用作下一层的输入。在 Hier-Agg 模块的最后一层中，我们将 x 和 y 组合在一起以形成聚集嵌入。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>h</mi><mi>L</mi></msup><mo>=</mo><msup><mi>x</mi><mrow><mo mathvariant="normal">′</mo><mi>L</mi></mrow></msup><mo>⊕</mo><msup><mi>y</mi><mrow><mo mathvariant="normal">′</mo><mi>L</mi></mrow></msup></mrow><annotation encoding="application/x-tex">h^L = x&#x27;^L \oplus y&#x27;^L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">L</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.924661em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span><span class="mord mathdefault mtight">L</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.035771em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span><span class="mord mathdefault mtight">L</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img06.png" alt="img" style="zoom:50%;">
+<hr>
+<h3 id="generating-aspect-oriented-representation"><a class="markdownIt-Anchor" href="#generating-aspect-oriented-representation"></a> Generating Aspect-oriented Representation</h3>
+<p>为了更好地预测一个方面的情感极性，我们使用门控机制以过滤面向特定 aspect 的情感信息流：</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img07.png" alt="img" style="zoom:50%;">
+<p>接下来在门控嵌入 h 中对非方面词进行 mask，并使方面词保持不变，并且得到 zero-mask 的嵌入：</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img08.png" alt="img" style="zoom:50%;">
+<p>最后，我们检索与方面单词在语义上相关的重要特征，并使用自注意力机制为每个上下文单词设置基于检索的注意力权重，将其加权求和之后即可获得面向方面的句子表示 z。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img09.png" alt="img" style="zoom:50%;">
+<hr>
+<h3 id="experiments"><a class="markdownIt-Anchor" href="#experiments"></a> Experiments</h3>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/BiGCN.assets/img10.png" alt="img" style="zoom:67%;">
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/2c46aad2.html">http://chenhao.space/post/2c46aad2.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ABSA/">ABSA</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/post/44c01c81.html"><span>nvidia-smi报错</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Just go go',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2020 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
