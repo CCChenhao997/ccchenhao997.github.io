@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="DualMRC"><meta name="keywords" content="ABSA"><meta name="author" content="Chenhao"><meta name="copyright" content="Chenhao"><title>DualMRC | Chenhao's Studio</title><link rel="shortcut icon" href="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/C.png"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?55415cdf8caf97abcdf8a6129a90edf2";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-148056531-1', 'auto');
+ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#introduction"><span class="toc-number">1.</span> <span class="toc-text"> Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proposed-framework"><span class="toc-number">2.</span> <span class="toc-text"> Proposed Framework</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dual-mrc-framework"><span class="toc-number">2.1.</span> <span class="toc-text"> Dual-MRC Framework</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mrc-dataset-conversion"><span class="toc-number">2.2.</span> <span class="toc-text"> MRC Dataset Conversion</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inference-process"><span class="toc-number">2.3.</span> <span class="toc-text"> Inference Process</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#experiments"><span class="toc-number">3.</span> <span class="toc-text"> Experiments</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/img/readbook.jpg"></div><div class="author-info__name text-center">Chenhao</div><div class="author-info__description text-center"></div><div class="follow-button"><a href="https://github.com/CCChenhao997">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">177</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">131</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">25</span></a></div><!--乌龟--><!--<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/turtles/turtle.swf?" width="260" height="150"><param name="movie" value="http://cdn.abowman.com/widgets/turtles/turtle.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param><param name="scale" value="noscale"/><param name="salign" value="tl"/></object>--><!--地球--><!--<script type="text/javascript" src="//rf.revolvermaps.com/0/0/1.js?i=5dx5ilw1vqk&amp;s=230&amp;m=0&amp;v=true&amp;r=false&amp;b=000000&amp;n=false&amp;c=54ff00" async="async"></script>--><!--ClustrMaps--></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Chenhao's Studio</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/slides">Slides</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/messages">Messages</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">DualMRC</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2021-07-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/NLP/">NLP</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">413</span><span class="post-meta__separator">|</span><span>阅读时长: 2 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p><strong>A Joint Training Dual-MRC Framework for Aspect Based Sentiment Analysis <a href="https://ojs.aaai.org/index.php/AAAI/article/view/17597" target="_blank" rel="noopener">[Link]</a></strong></p>
+<p>Yue Mao, Yi Shen, Chao Yu, Longjun Cai</p>
+<p>Alibaba Group, Beijing, China</p>
+<p><strong>AAAI 2021</strong></p>
+<hr>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>本文做的是 (aspect, opinion, sentiment) 三元组抽取任务。</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-01.png" style="zoom:50%;">
+<p>In the sentence “The ambience was nice, but the service was not so great.”, the aspect terms (AT) are “ambience/service” and the opinion terms (OT) are “nice/not so great”.</p>
+<p>ABSA subtasks:</p>
+<ul>
+<li>AE: AT extraction</li>
+<li>OE: OT extraction</li>
+<li>SC: aspect-level sentiment classiﬁcation</li>
+<li>AESC: AT extraction and sentiment classiﬁcation</li>
+<li>AOE: aspect-oriented OT extraction</li>
+<li>Pair: (AT, OT) pair extraction</li>
+<li>Triple: (AT, OT, SP) triple extraction</li>
+</ul>
+<p>In this paper, we propose <strong>a joint training framework</strong> to handle all ABSA subtasks in one single model. We use BERT as our backbone network and use <strong>a span based model to detect the start/end positions of ATs/OTs</strong> from a sentence.</p>
+<p>We convert the original triple extraction task to two machine reading comprehension (MRC) problems. The left MRC is used to handle AE and the right MRC is used to handle AOE and SC.</p>
+<p>Main contributions:</p>
+<ul>
+<li>We show the triple extraction task can be jointly trained with three objectives.</li>
+<li>We propose a dual-MRC framework that can handle all subtasks in ABSA (as illustrated in Table 1).</li>
+<li>We conduct experiments to compare our proposed framework on these tasks. Experimental results show that our proposed method outperforms the state-of-the-art methods.</li>
+</ul>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-02.png" style="zoom:50%;">
+<hr>
+<h3 id="proposed-framework"><a class="markdownIt-Anchor" href="#proposed-framework"></a> Proposed Framework</h3>
+<h4 id="dual-mrc-framework"><a class="markdownIt-Anchor" href="#dual-mrc-framework"></a> Dual-MRC Framework</h4>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-03.png" style="zoom:80%;">
+<p>Loss function:</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-04.png" style="zoom:50%;">
+<h4 id="mrc-dataset-conversion"><a class="markdownIt-Anchor" href="#mrc-dataset-conversion"></a> MRC Dataset Conversion</h4>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-05.png" style="zoom:50%;">
+<h4 id="inference-process"><a class="markdownIt-Anchor" href="#inference-process"></a> Inference Process</h4>
+<p>训练：End-to-End</p>
+<p>推理：Pipeline</p>
+<blockquote>
+<p>During the training process, the ground truth of all ATs are known, then the right MRC can be constructed based on these ATs. Thus, the training process is end-to-end. However, during the inference process, the ATs are the output of the left MRC.</p>
+</blockquote>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-06.png" style="zoom:50%;">
+<hr>
+<h3 id="experiments"><a class="markdownIt-Anchor" href="#experiments"></a> Experiments</h3>
+<ul>
+<li>
+<p>Main Results</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-07.png" style="zoom:67%;">
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-08.png" style="zoom:67%;">
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-09.png" style="zoom:67%;">
+</li>
+<li>
+<p>Analysis on Joint Learning</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-10.png" style="zoom:50%;">
+<blockquote>
+<p>For the task AESC, by jointly learning to extract the opinion terms for a given aspect, the result of aspect-level sentiment classiﬁcation is improved a little bit. It makes sense because extracted OTs are useful for identifying the sentiment polarity of the given AT.</p>
+<p>For the task Pair, the F-1 scores for OT extraction decrease a little bit when the sentiment classiﬁcation objective is added. The reason might be that the sentiment polarity can point to multiple OTs in a sentence where some OTs are not paired with the given AT.</p>
+</blockquote>
+</li>
+<li>
+<p>Case Study</p>
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-11.png" style="zoom:67%;">
+<img src="https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/NLP/NLP%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/Dual-MRC.assets/img-12.png" style="zoom:50%;">
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Chenhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://chenhao.space/post/bc7f354f.html">http://chenhao.space/post/bc7f354f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://chenhao.space">Chenhao's Studio</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ABSA/">ABSA</a></div><div class="social-share"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/post/89672038.html"><span>Position-Aware Tagging for Aspect Sentiment Triplet Extraction</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=27867140&auto=0&height=66"></iframe></div><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'GjEQNoax0r5e528SPYqxOPME-gzGzoHsz',
+  appKey:'vLtYMpgjD90htoYal5mIjk4b',
+  placeholder:'Make a comment',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(https://chenhao-1300052108.cos.ap-beijing.myqcloud.com/ch-Pic/Hexo%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%9B%BE%E7%89%87/intro/bcar-bg.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2021 By Chenhao</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">🍉🍉🍉 Hi, welcome to my <a href="http://chenhao.space">blog</a>! 🍉🍉🍉</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script src="/js/love.js?version=1.6.1"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
